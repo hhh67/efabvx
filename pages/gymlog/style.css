@@ -48,10 +48,16 @@ main {
     text-align: center;
 }
 
-.twitter {
+.sns {
     text-align: center;
     margin-top: 10vh;
 }
+
+.instagram-media {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
 
 h2 {
     display: flex;
