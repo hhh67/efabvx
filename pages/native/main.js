@@ -18,6 +18,11 @@ window.addEventListener('load', () => {
         case 'qiitareaderapp':
             const qiitaReaderCard = document.getElementById('appCardQiitaReader')
             qiitaReaderCard.style.display = 'none'
+            if (darkModeMediaQuery) {
+                document.body.style.backgroundColor = 'black'
+            } else {
+                document.body.style.backgroundColor = 'white'
+            }
             break;
         default:
             break;
