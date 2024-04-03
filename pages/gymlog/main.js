@@ -7,7 +7,7 @@ window.addEventListener('load', () => {
     const xLogo = document.getElementById('xLogo')
     if (logo && isDarkMode) {
         logo.src = "../../public/gymlog/logo_dark.png"
-        appStoreLogo.src = "../../public/gymlog/app_store_logo_dark.svg"
+        appStoreLogo.src = "../../public/app_store_logo_dark.svg"
         xLogo.src = "../../public/gymlog/x_logo_dark.png"
     }
 
