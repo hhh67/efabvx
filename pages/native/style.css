@@ -1,0 +1,113 @@
+body {
+    background-color: #EEEEFF;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    font-family: 'Courier New', Courier, monospace;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
+    color: #000;
+}
+
+#developerName {
+    color: #30a9e6;
+    text-decoration: underline;
+}
+
+main {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.app-card {
+    border-radius: 20px;
+    height: 170px;
+    padding: 16px;
+    padding-bottom: 0;
+    margin-bottom: 18px;
+}
+
+#appCardGymlog {
+    background-color: #c7e1ff;
+}
+
+#appCardQiitaReader {
+    background-color: #d9ffd1;
+}
+
+.app-title-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.app-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: block;
+    margin-right: 12px;
+}
+
+.app-title {
+    display: block;
+    font-size: 18px;
+}
+
+#appTitleGymlog {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#appTitleQiitaReader {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.app-description {
+    text-align: center;
+    font-size: 14px;
+}
+
+.app-store-logo-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+/* 
+    ダークモード
+*/
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000011;
+        color: #fff;
+        margin-bottom: 6vh;
+    }
+
+    #appCardGymlog {
+        background-color: #687585;
+    }
+
+    #appCardQiitaReader {
+        background-color: #657a61;
+    }
+
+    a,
+    a:visited,
+    a:hover,
+    a:active {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    #developerName {
+        color: #30a9e6;
+        text-decoration: underline;
+    }
+}
