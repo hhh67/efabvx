@@ -42,6 +42,10 @@ main {
     background-color: #d9ffd1;
 }
 
+#appCardMoonPfase {
+    background-color: #4f4365;
+}
+
 .app-title-container {
     display: flex;
     justify-content: flex-start;
@@ -61,7 +65,7 @@ main {
     font-size: 18px;
 }
 
-#appTitleGymlog {
+#appTitleGymlog, #appTitleMoonPfase {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 

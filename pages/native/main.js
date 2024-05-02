@@ -24,6 +24,9 @@ window.addEventListener('load', () => {
                 document.body.style.backgroundColor = 'white'
             }
             break;
+        case 'moonpfase':
+            const moonPfaseCard = document.getElementById('appCardMoonPfase')
+            moonPfaseCard.style.display = 'none'
         default:
             break;
     }
