@@ -25,10 +25,12 @@ a:active {
 }
 
 main {
-    margin-left: 5vw;
-    margin-right: 5vw;
-    margin-bottom: 16px;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    margin-bottom: 120px;
     max-width: var(--maxWidth);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #gumi {
@@ -39,6 +41,7 @@ main {
     bottom: 0;
     left: -200px;
     transition: left 5s linear; 
+    z-index: 9999;
 }
 
 .app-card {
@@ -84,6 +87,7 @@ main {
 .app-title {
     display: block;
     font-size: 18px;
+    margin-left: 0.5rem;
 }
 
 #appTitleGymlog, #appTitleMoonPfase {
@@ -103,6 +107,40 @@ main {
     display: flex;
     justify-content: flex-end;
     margin-top: 16px;
+}
+
+.sns-card {
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    height: 40px;
+    padding: 24px;
+    margin-bottom: 18px;
+    max-width: var(--maxWidth);
+}
+
+#instagramCard {
+    background: linear-gradient(to top left, #7200b9, #b7199a, #ffc400);
+}
+
+#appTitleInstagram {
+    color: white;
+}
+
+#xCard {
+    background-color:  black;
+}
+
+#appTitleX {
+    color: white;
+}
+
+#emailCard {
+    background: linear-gradient(to top, #006aff, #00d9ff);
+}
+
+#appTitleEmail {
+    color: white;
 }
 
 /* 
