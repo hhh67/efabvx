@@ -30,4 +30,18 @@ window.addEventListener('load', () => {
         default:
             break;
     }
+
+    const gumi = document.getElementById('gumi');
+    setTimeout(() => {
+        gumi.style.left = '0'; // 左からの位置を変更して表示
+    }, 2000);
+
+    gumi.addEventListener('click', () => {
+        gumi.style.transition = 'left 0.5s linear'
+        gumi.style.left = '-200px'
+        setTimeout(() => {
+            gumi.style.transition = 'left 5s linear'
+            gumi.style.left = '0';
+        }, 3000)
+    })
 })

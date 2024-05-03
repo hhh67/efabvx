@@ -4,8 +4,7 @@
 
 body {
     background-color: #EEEEFF;
-    margin-left: 5vw;
-    margin-right: 5vw;
+    margin: 0;
     font-family: 'Courier New', Courier, monospace;
     -webkit-user-select: none;
     user-select: none;
@@ -26,11 +25,20 @@ a:active {
 }
 
 main {
-    margin-top: 16px;
+    margin-left: 5vw;
+    margin-right: 5vw;
     margin-bottom: 16px;
-    margin-left: auto;
-    margin-right: auto;
     max-width: var(--maxWidth);
+}
+
+#gumi {
+    padding: 0;
+    display: block;
+    margin-top: auto;
+    position: fixed;
+    bottom: 0;
+    left: -200px;
+    transition: left 5s linear; 
 }
 
 .app-card {
