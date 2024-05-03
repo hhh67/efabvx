@@ -37,7 +37,7 @@ window.addEventListener('load', () => {
     }, 2000);
 
     gumi.addEventListener('click', () => {
-        gumi.style.transition = 'left 0.5s linear'
+        gumi.style.transition = 'left 0.1s linear'
         gumi.style.left = '-200px'
         setTimeout(() => {
             gumi.style.transition = 'left 5s linear'
