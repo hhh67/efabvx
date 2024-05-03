@@ -119,6 +119,10 @@ main {
     max-width: var(--maxWidth);
 }
 
+.sns-card:hover {
+    opacity: 0.5;
+}
+
 #instagramCard {
     background: linear-gradient(to top left, #7200b9, #b7199a, #ffc400);
 }
