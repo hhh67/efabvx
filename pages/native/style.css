@@ -152,7 +152,7 @@ main {
 */
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #000011;
+        background-color: #29292f;
         color: #fff;
         margin-bottom: 6vh;
     }
