@@ -147,6 +147,14 @@ main {
     color: white;
 }
 
+#gitHubCard {
+    background: linear-gradient(40deg, #e8cece, #e6e4ce, #d0e6e9, #ffffff, #d3d9ea, #cfe6ea, #ddd2f0, #e1cae6, #e9e7d3, #d3e2eb);
+}
+
+#appTitleGitHub {
+    color: black;
+}
+
 /* 
     ダークモード
 */
