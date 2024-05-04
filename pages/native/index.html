@@ -26,6 +26,8 @@
     <meta property="og:image" content="https://hhh67.github.io/app-portal/public/ogp.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@efabvx" />
+    <!-- PWA -->
+    <link rel="manifest" href="./manifest.json"/>
 </head>
 
 <body>
@@ -129,6 +131,18 @@
             </a>
         </section>
     </main>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./service-worker.js').then((registration) => {
+          }, (err) => {
+            console.error('エラーです')
+            console.error(err);
+          });
+        });
+      }
+    </script>
 </body>
 
 </html>
