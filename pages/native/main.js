@@ -10,6 +10,8 @@ window.addEventListener('load', () => {
     }
 
     const params = new URLSearchParams(location.search)
+    const worksText = document.getElementById('worksText')
+    const snsBlock = document.getElementById('snsBlock')
     switch (params.get('from')) {
         case 'gymlogapp':
             const gymlogCard = document.getElementById('appCardGymlog')
@@ -23,10 +25,17 @@ window.addEventListener('load', () => {
             } else {
                 document.body.style.backgroundColor = 'white'
             }
+            snsBlock.style.display = 'none'
+            worksText.innerText = 'おすすめ'
             break;
         case 'moonpfase':
             const moonPfaseCard = document.getElementById('appCardMoonPfase')
             moonPfaseCard.style.display = 'none'
+            snsBlock.style.display = 'none'
+            document.body.style.backgroundColor = '#0a0513'
+            worksText.innerText = 'おすすめ'
+            worksText.style.color = 'white'
+            break;
         default:
             break;
     }
