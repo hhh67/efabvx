@@ -44,14 +44,15 @@
 h1 {
     font-family: 'Fragment Mono', monospace;
     color: #49BE02;
-    margin-left: 1vw;
-    margin-right: 1vw;
-    ;
+}
+
+body {
+    margin-left: 5vw;
+    margin-right: 5vw;
 }
 
 main {
-    margin-left: 3vw;
-    margin-right: 3vw;
+    margin-top: 3rem;
 }
 
 h2 {
@@ -83,16 +84,6 @@ dd {
     opacity: 0.5;
 }
 
-h2,
-p,
 .mailto {
     font-family: 'メイリオ', 'Meiryo', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
-}
-
-h2 {
-    margin-bottom: 0.5rem;
-}
-
-p {
-    margin-top: 0;
 }
