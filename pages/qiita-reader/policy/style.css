@@ -84,6 +84,8 @@ dd {
     opacity: 0.5;
 }
 
+h2,
+p,
 .mailto {
     font-family: 'メイリオ', 'Meiryo', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
 }
