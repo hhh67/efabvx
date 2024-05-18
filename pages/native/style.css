@@ -155,6 +155,14 @@ main {
     color: black;
 }
 
+#qiitaCard {
+    background: #55C400;
+}
+
+#appTitleQiita {
+    color: white;
+}
+
 .app-card-link-button {
     display: flex;
     justify-content: space-between;
