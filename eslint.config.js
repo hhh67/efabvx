@@ -2,13 +2,14 @@ import pluginTypeScript from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
 import pluginPrettier from 'eslint-config-prettier';
 import pluginImport from 'eslint-plugin-import';
+import pluginJsxA11y from 'eslint-plugin-jsx-a11y';
 import pluginReact from 'eslint-plugin-react';
-import reactConfigRecommended from 'eslint-plugin-react/configs/recommended.js';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
+import reactConfigRecommended from 'eslint-plugin-react/configs/recommended.js';
 
 export default [
   {
-    ignores: ['./dist'],
+    ignores: ['**/dist/**', '**/generated/**'],
   },
   {
     files: ['**/*.ts', '**/*.tsx'],
@@ -25,23 +26,34 @@ export default [
   },
   {
     files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        project: ['tsconfig.json', 'tsconfig.node.json', 'vite.config.js'],
+      },
+    },
     settings: {
       react: {
         version: 'detect',
       },
       'import/resolver': {
-        node: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        },
-        typescript: {},
+        typescript: true,
+        node: true,
       },
     },
     plugins: {
       react: pluginReact,
       'react-hooks': pluginReactHooks,
       import: pluginImport,
+      '@typescript-eslint': pluginTypeScript,
+      'jsx-a11y': pluginJsxA11y,
     },
     rules: {
+      ...pluginJsxA11y.configs.recommended.rules,
       ...pluginImport.configs['recommended'].rules,
       ...reactConfigRecommended.rules,
       ...pluginPrettier.rules,
