@@ -1,13 +1,11 @@
 # app-portal
 
-<p align="center">
-    <a href="https://www.efabvx.com/pages/native/">
-      <img src="https://hhh67.github.io/app-portal/public/link_button.png" width="400">
-    </a>  
-</p>
+## 環境構築
 
-リリースしたアプリのプライバシーポリシーをGitHubPagesでホスティングするためのリポジトリ
+```
+# 依存関係のインストール
+bun install
 
-そのうちちゃんとしたポータルサイトを作ろう
-
-のつもりだった
+# 起動
+bun run dev
+```
