@@ -3,8 +3,8 @@ import typescriptParser from '@typescript-eslint/parser';
 import pluginPrettier from 'eslint-config-prettier';
 import pluginImport from 'eslint-plugin-import';
 import pluginReact from 'eslint-plugin-react';
-import pluginReactHooks from 'eslint-plugin-react-hooks';
 import reactConfigRecommended from 'eslint-plugin-react/configs/recommended.js';
+import pluginReactHooks from 'eslint-plugin-react-hooks';
 
 export default [
   {
