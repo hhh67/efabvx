@@ -70,6 +70,10 @@ main {
     background-color: #c7acff;
 }
 
+#appCardPicgle {
+    background-color: rgb(253, 188, 255);
+}
+
 .app-title-container {
     display: flex;
     justify-content: flex-start;
@@ -193,6 +197,10 @@ main {
     
     #appCardMoonPfase {
         background-color: #4f4365;
+    }
+
+    #appCardPicgle {
+        background-color: rgb(96, 46, 98);
     }
     
     a,
