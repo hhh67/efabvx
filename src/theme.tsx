@@ -11,14 +11,12 @@ declare module '@mui/material/styles' {
     gymlog: PaletteColor;
     moonPfase: PaletteColor;
     picgle: PaletteColor;
-    pastel: PaletteColor;
   }
   interface PaletteOptions {
     qiitaReader: PaletteColorOptions;
     gymlog: PaletteColorOptions;
     moonPfase: PaletteColorOptions;
     picgle: PaletteColorOptions;
-    pastel: PaletteColorOptions;
   }
 
   interface TypeBackground {
@@ -26,6 +24,11 @@ declare module '@mui/material/styles' {
     gymlog: string;
     moonPfase: string;
     picgle: string;
+    instagram: string;
+    github: string;
+    qiita: string;
+    x: string;
+    mail: string;
   }
 }
 
@@ -101,9 +104,6 @@ const theme: Theme = createTheme({
     picgle: {
       main: 'linear-gradient(45deg, #A460E8, #DF428D)',
     },
-    pastel: {
-      main: 'linear-gradient(40deg, #e8cece, #e6e4ce, #d0e6e9, #ffffff, #d3d9ea, #cfe6ea, #ddd2f0, #e1cae6, #e9e7d3, #d3e2eb)',
-    },
     primary: {
       main: '#3500c7',
       light: '#6a00ff',
@@ -118,6 +118,12 @@ const theme: Theme = createTheme({
       gymlog: '#c7e1ff',
       moonPfase: '#c7acff',
       picgle: '#fdbcff',
+      instagram: 'linear-gradient(to top left, #7200b9, #b7199a, #ffc400)',
+      github:
+        'linear-gradient(40deg, #e8cece, #e6e4ce, #d0e6e9, #ffffff, #d3d9ea, #cfe6ea, #ddd2f0, #e1cae6, #e9e7d3, #d3e2eb)',
+      qiita: 'linear-gradient(to top left, #55c500, #55c500)',
+      x: 'black',
+      mail: 'linear-gradient(to top, #1100ff, #abf2ff)',
     },
   },
 });
