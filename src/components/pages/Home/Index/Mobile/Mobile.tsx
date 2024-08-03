@@ -1,8 +1,4 @@
-import { SNS } from '@/constants';
-import GymlogAppIcon from '@/images/gymlog/appicon.png?url';
-import MoonPfaseAppIcon from '@/images/moon-pfase/appicon.png?url';
-import PicgleAppIcon from '@/images/picgle/appicon.png?url';
-import QiitaReaderAppIcon from '@/images/qiita-reader/appicon.png?url';
+import { APP, SNS } from '@/constants';
 import theme from '@/theme';
 import { Stack, Typography } from '@mui/material';
 import { AccordionSection } from './AccordionSection';
@@ -30,34 +26,33 @@ export const Mobile: React.FC = () => {
             </Typography>
             <AppCard
               app={{
-                displayName: 'QiitaReader',
-                description:
-                  'Qiitaをもっと快適に利用したい開発者のためのアプリ',
-                iconSrc: QiitaReaderAppIcon,
+                displayName: APP.QIITA_READER.DISPLAY_NAME,
+                description: APP.QIITA_READER.DESCRIPTION,
+                iconSrc: APP.QIITA_READER.ICON_SRC,
               }}
               background={theme.palette.background.qiitaReader}
             />
             <AppCard
               app={{
-                displayName: 'ジムログ',
-                description: 'シンプルで使い勝手のいいトレーニング記録アプリ',
-                iconSrc: GymlogAppIcon,
+                displayName: APP.GYMLOG.DISPLAY_NAME,
+                description: APP.GYMLOG.DESCRIPTION,
+                iconSrc: APP.GYMLOG.ICON_SRC,
               }}
               background={theme.palette.background.gymlog}
             />
             <AppCard
               app={{
-                displayName: 'MoonPfase',
-                description: '美しいグラフィックの月の満ち欠けカレンダー',
-                iconSrc: MoonPfaseAppIcon,
+                displayName: APP.MOON_PFASE.DISPLAY_NAME,
+                description: APP.MOON_PFASE.DESCRIPTION,
+                iconSrc: APP.MOON_PFASE.ICON_SRC,
               }}
               background={theme.palette.background.moonPfase}
             />
             <AppCard
               app={{
-                displayName: 'Picgle',
-                description: '画像でWeb検索ができるアプリ',
-                iconSrc: PicgleAppIcon,
+                displayName: APP.PICGLE.DISPLAY_NAME,
+                description: APP.PICGLE.DESCRIPTION,
+                iconSrc: APP.PICGLE.ICON_SRC,
               }}
               background={theme.palette.background.picgle}
             />

@@ -1,8 +1,35 @@
+import GymlogAppIcon from '@/images/gymlog/appicon.png?url';
+import MoonPfaseAppIcon from '@/images/moon-pfase/appicon.png?url';
+import PicgleAppIcon from '@/images/picgle/appicon.png?url';
+import QiitaReaderAppIcon from '@/images/qiita-reader/appicon.png?url';
 import GithubIcon from '@/images/sns/github.png?url';
 import InstagramIcon from '@/images/sns/instagram.png?url';
 import MailIcon from '@/images/sns/mail.png?url';
 import QiitaIcon from '@/images/sns/qiita.png?url';
 import XIcon from '@/images/sns/x.png';
+
+export const APP = {
+  QIITA_READER: {
+    DISPLAY_NAME: 'QiitaReader',
+    DESCRIPTION: 'Qiitaをもっと快適に利用したい開発者のためのアプリ',
+    ICON_SRC: QiitaReaderAppIcon,
+  },
+  GYMLOG: {
+    DISPLAY_NAME: 'ジムログ',
+    DESCRIPTION: 'シンプルで使い勝手のいいトレーニング記録アプリ',
+    ICON_SRC: GymlogAppIcon,
+  },
+  MOON_PFASE: {
+    DISPLAY_NAME: 'MoonPfase',
+    DESCRIPTION: '美しいグラフィックの月の満ち欠けカレンダー',
+    ICON_SRC: MoonPfaseAppIcon,
+  },
+  PICGLE: {
+    DISPLAY_NAME: 'Picgle',
+    DESCRIPTION: '画像でWeb検索ができるアプリ',
+    ICON_SRC: PicgleAppIcon,
+  },
+} as const;
 
 export const SNS = {
   INSTAGRAM: {
