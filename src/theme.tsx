@@ -20,13 +20,42 @@ declare module '@mui/material/styles' {
     picgle: PaletteColorOptions;
     pastel: PaletteColorOptions;
   }
+
+  interface TypeBackground {
+    qiitaReader: string;
+    gymlog: string;
+    moonPfase: string;
+    picgle: string;
+  }
 }
 
 const theme: Theme = createTheme({
-  components: {},
   spacing: 8,
+  shape: {
+    borderRadius: 8,
+  },
   typography: {
     fontSize: 14,
+  },
+  components: {
+    MuiCard: {
+      defaultProps: {
+        variant: 'outlined',
+      },
+      styleOverrides: {
+        root: {
+          borderRadius: 16,
+          border: 'none',
+        },
+      },
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          paddingTop: 0,
+        },
+      },
+    },
   },
   palette: {
     mode: 'light',
@@ -55,6 +84,10 @@ const theme: Theme = createTheme({
     background: {
       default: '#e8f7ff',
       paper: '#fff',
+      qiitaReader: '#d9ffd1',
+      gymlog: '#c7e1ff',
+      moonPfase: '#c7acff',
+      picgle: '#fdbcff',
     },
   },
 });
