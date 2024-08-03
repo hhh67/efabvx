@@ -42,7 +42,7 @@ export const AppCard: React.FC<AppCardProps> = ({
       />
       <CardContent>
         <Stack direction={'column'} spacing={2}>
-          <Typography variant="body2" px={1} textAlign={'center'}>
+          <Typography variant="body2" px={1} textAlign={'left'}>
             {app.description}
           </Typography>
           <Stack direction="row-reverse">

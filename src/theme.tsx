@@ -38,6 +38,35 @@ const theme: Theme = createTheme({
     fontSize: 14,
   },
   components: {
+    MuiAccordion: {
+      defaultProps: {
+        elevation: 0,
+        square: true,
+        disableGutters: true,
+      },
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+          border: 'none',
+          '&::before': {
+            display: 'none',
+          },
+          '&:not(:last-child)': {
+            borderBottom: 0,
+          },
+          borderRadius: 8,
+        },
+      },
+    },
+    MuiAccordionSummary: {
+      styleOverrides: {
+        root: {
+          '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+            transform: 'rotate(90deg)',
+          },
+        },
+      },
+    },
     MuiCard: {
       defaultProps: {
         variant: 'outlined',
@@ -46,6 +75,7 @@ const theme: Theme = createTheme({
         root: {
           borderRadius: 16,
           border: 'none',
+          shadow: 'none',
         },
       },
     },
