@@ -1,4 +1,4 @@
-import { Home } from '@/components/pages/mobile/Home/Index/Home';
+import { Home } from '@/components/pages/Home/Index/Home';
 import { Helmet } from 'react-helmet-async';
 import { Route, Routes } from 'react-router-dom';
 

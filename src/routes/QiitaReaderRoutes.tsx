@@ -1,4 +1,4 @@
-import { QiitaReader } from '@/components/pages/mobile/QiitaReader/Index';
+import { QiitaReader } from '@/components/pages/QiitaReader/Index';
 import { Helmet } from 'react-helmet-async';
 import { Route, Routes } from 'react-router-dom';
 
