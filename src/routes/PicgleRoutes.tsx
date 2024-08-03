@@ -1,4 +1,4 @@
-import { Picgle } from '@/components/pages/Picgle/Index';
+import { Picgle } from '@/components/pages/mobile/Picgle/Index';
 import { Helmet } from 'react-helmet-async';
 import { Route, Routes } from 'react-router-dom';
 

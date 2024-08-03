@@ -1,4 +1,4 @@
-import { Gymlog } from '@/components/pages/Gymlog/Index';
+import { Gymlog } from '@/components/pages/mobile/Gymlog/Index';
 import { Helmet } from 'react-helmet-async';
 import { Route, Routes } from 'react-router-dom';
 
