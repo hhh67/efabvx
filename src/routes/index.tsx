@@ -1,3 +1,4 @@
+import { Layout } from '@/components/common/Layout/Layout';
 import { Typography } from '@mui/material';
 import {
   Outlet,
@@ -5,19 +6,19 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
+import { GymlogRoutes } from './GymlogRoutes';
 import { HomeRoutes } from './HomeRoutes';
 import { MoonPfaseRoutes } from './MoonPfaseRoutes';
 import { PicgleRoutes } from './PicgleRoutes';
 import { QiitaReaderRoutes } from './QiitaReaderRoutes';
-import { GymlogRoutes } from './GymlogRoutes';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
       element={
-        <main>
+        <Layout>
           <Outlet />
-        </main>
+        </Layout>
       }
       errorElement={<Typography>error</Typography>}
     >
