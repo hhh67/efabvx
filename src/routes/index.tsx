@@ -1,11 +1,15 @@
 import { Typography } from '@mui/material';
-import { Helmet } from 'react-helmet-async';
 import {
   Outlet,
   Route,
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
+import { HomeRoutes } from './HomeRoutes';
+import { MoonPfaseRoutes } from './MoonPfaseRoutes';
+import { PicgleRoutes } from './PicgleRoutes';
+import { QiitaReaderRoutes } from './QiitaReaderRoutes';
+import { GymlogRoutes } from './GymlogRoutes';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,19 +21,11 @@ export const router = createBrowserRouter(
       }
       errorElement={<Typography>error</Typography>}
     >
-      <Route errorElement={<Typography>error</Typography>}>
-        <Route
-          path="/"
-          element={
-            <>
-              <Helmet>
-                <title>Home</title>
-              </Helmet>
-              <Typography>test</Typography>
-            </>
-          }
-        ></Route>
-      </Route>
+      <Route path="/" element={<HomeRoutes />} />
+      <Route path="qiita-reader" element={<QiitaReaderRoutes />} />
+      <Route path="moon-pfase" element={<MoonPfaseRoutes />} />
+      <Route path="picgle" element={<PicgleRoutes />} />
+      <Route path="gymlog" element={<GymlogRoutes />} />
     </Route>,
   ),
 );
