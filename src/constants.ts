@@ -13,21 +13,25 @@ export const APP = {
     DISPLAY_NAME: 'QiitaReader',
     DESCRIPTION: 'Qiitaをもっと快適に利用したい開発者のためのアプリ',
     ICON_SRC: QiitaReaderAppIcon,
+    STORE_ID: 6470926641,
   },
   GYMLOG: {
     DISPLAY_NAME: 'ジムログ',
     DESCRIPTION: 'シンプルで使い勝手のいいトレーニング記録アプリ',
     ICON_SRC: GymlogAppIcon,
+    STORE_ID: 6479692718,
   },
   MOON_PFASE: {
     DISPLAY_NAME: 'MoonPfase',
     DESCRIPTION: '美しいグラフィックの月の満ち欠けカレンダー',
     ICON_SRC: MoonPfaseAppIcon,
+    STORE_ID: 6499499347,
   },
   PICGLE: {
     DISPLAY_NAME: 'Picgle',
     DESCRIPTION: '画像でWeb検索ができるアプリ',
     ICON_SRC: PicgleAppIcon,
+    STORE_ID: 6563143030,
   },
 } as const;
 

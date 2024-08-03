@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Link,
   Stack,
   Typography,
 } from '@mui/material';
@@ -13,6 +14,7 @@ type AppCardProps = {
     displayName: string;
     description: string;
     iconSrc: any;
+    storeId: number;
   };
   background: string;
 };
@@ -46,14 +48,22 @@ export const AppCard: React.FC<AppCardProps> = ({
             {app.description}
           </Typography>
           <Stack direction="row-reverse">
-            <Box
-              component="img"
-              src={AppStoreLogo}
-              alt="App Store"
-              width="120px"
-              justifySelf={'flex-start'}
-              sx={{ alignSelf: 'center' }}
-            />
+            <Link
+              href={`https://apps.apple.com/jp/app/id${app.storeId}`}
+              component={'a'}
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{ textDecoration: 'none' }}
+            >
+              <Box
+                component="img"
+                src={AppStoreLogo}
+                alt="App Store"
+                width="120px"
+                justifySelf={'flex-start'}
+                sx={{ alignSelf: 'center' }}
+              />
+            </Link>
           </Stack>
         </Stack>
       </CardContent>

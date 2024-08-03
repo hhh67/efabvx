@@ -29,6 +29,7 @@ export const Mobile: React.FC = () => {
                 displayName: APP.QIITA_READER.DISPLAY_NAME,
                 description: APP.QIITA_READER.DESCRIPTION,
                 iconSrc: APP.QIITA_READER.ICON_SRC,
+                storeId: APP.QIITA_READER.STORE_ID,
               }}
               background={theme.palette.background.qiitaReader}
             />
@@ -37,6 +38,7 @@ export const Mobile: React.FC = () => {
                 displayName: APP.GYMLOG.DISPLAY_NAME,
                 description: APP.GYMLOG.DESCRIPTION,
                 iconSrc: APP.GYMLOG.ICON_SRC,
+                storeId: APP.GYMLOG.STORE_ID,
               }}
               background={theme.palette.background.gymlog}
             />
@@ -45,6 +47,7 @@ export const Mobile: React.FC = () => {
                 displayName: APP.MOON_PFASE.DISPLAY_NAME,
                 description: APP.MOON_PFASE.DESCRIPTION,
                 iconSrc: APP.MOON_PFASE.ICON_SRC,
+                storeId: APP.MOON_PFASE.STORE_ID,
               }}
               background={theme.palette.background.moonPfase}
             />
@@ -53,6 +56,7 @@ export const Mobile: React.FC = () => {
                 displayName: APP.PICGLE.DISPLAY_NAME,
                 description: APP.PICGLE.DESCRIPTION,
                 iconSrc: APP.PICGLE.ICON_SRC,
+                storeId: APP.PICGLE.STORE_ID,
               }}
               background={theme.palette.background.picgle}
             />
