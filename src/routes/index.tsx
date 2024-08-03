@@ -1,4 +1,5 @@
 import { Typography } from '@mui/material';
+import { Helmet } from 'react-helmet-async';
 import {
   Outlet,
   Route,
@@ -17,7 +18,17 @@ export const router = createBrowserRouter(
       errorElement={<Typography>error</Typography>}
     >
       <Route errorElement={<Typography>error</Typography>}>
-        <Route path="/" element={<Typography>test</Typography>}></Route>
+        <Route
+          path="/"
+          element={
+            <>
+              <Helmet>
+                <title>Home</title>
+              </Helmet>
+              <Typography>test</Typography>
+            </>
+          }
+        ></Route>
       </Route>
     </Route>,
   ),
