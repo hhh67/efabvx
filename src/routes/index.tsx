@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import {
   Outlet,
   Route,
@@ -13,10 +14,10 @@ export const router = createBrowserRouter(
           <Outlet />
         </main>
       }
-      errorElement={<p>error</p>}
+      errorElement={<Typography>error</Typography>}
     >
-      <Route errorElement={<p>error</p>}>
-        <Route path="/" element={<p>test</p>}></Route>
+      <Route errorElement={<Typography>error</Typography>}>
+        <Route path="/" element={<Typography>test</Typography>}></Route>
       </Route>
     </Route>,
   ),
