@@ -3,7 +3,6 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 
-// https://vitejs.dev/config/
 export default defineConfig(({}) => ({
   plugins: [
     react(),
@@ -22,6 +21,12 @@ export default defineConfig(({}) => ({
       output: {
         manualChunks: {
           vendor: ['react', 'react-router-dom', 'react-dom'],
+          mui: [
+            '@emotion/react',
+            '@emotion/styled',
+            '@mui/icons-material',
+            '@mui/material',
+          ],
         },
       },
     },
