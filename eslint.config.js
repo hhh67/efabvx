@@ -91,4 +91,10 @@ export default [
       ],
     },
   },
+  {
+    files: ['theme.tsx'],
+    rules: {
+      '@typescript-eslint/consistent-type-definitions': 'off',
+    },
+  },
 ];

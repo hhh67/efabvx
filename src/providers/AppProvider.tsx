@@ -1,11 +1,17 @@
-import { router } from '@/routes';
+import theme from '@/theme';
+import { ThemeProvider } from '@emotion/react';
 import { HelmetProvider } from 'react-helmet-async';
-import { RouterProvider } from 'react-router-dom';
 
-export const AppProvider: React.FC = () => {
+type AppProviderProps = {
+  children: React.ReactNode;
+};
+
+export const AppProvider: React.FC<AppProviderProps> = ({
+  children,
+}: AppProviderProps) => {
   return (
     <HelmetProvider>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </HelmetProvider>
   );
 };
