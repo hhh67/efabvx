@@ -33,7 +33,7 @@ export default [
         },
         ecmaVersion: 'latest',
         sourceType: 'module',
-        project: ['tsconfig.json', 'tsconfig.node.json', 'vite.config.js'],
+        project: ['tsconfig.json', 'tsconfig.node.json', 'vite.config.ts'],
       },
     },
     settings: {
