@@ -9,7 +9,7 @@ import { SnsCard } from './SnsCard';
 export const Mobile: React.FC = () => {
   return (
     <Stack direction={'column'} spacing={4}>
-      <Stack direction={'column'} spacing={1}>
+      <Stack direction={'column'} spacing={2}>
         {/* 🍎 Apps */}
         <AccordionSection title={'🍎　Apps'}>
           <Stack direction={'column'} spacing={2}>
@@ -112,6 +112,9 @@ export const Mobile: React.FC = () => {
       {/* ✉️ Contact */}
       <Section title="Contact">
         <Typography variant="body2">メールにて承ります。</Typography>
+        <Typography variant="body2">
+          と言いつつ各種SNSのDMでも承ります。
+        </Typography>
         <SnsCard
           sns={{
             description: SNS.MAIL.DESCRIPTION,
