@@ -10,7 +10,7 @@ export const Section: React.FC<SectionProps> = ({
   children,
 }: SectionProps) => {
   return (
-    <Stack direction={'column'} spacing={1}>
+    <Stack direction={'column'} spacing={1} px={2}>
       <Typography variant="h6" fontWeight={'bold'}>
         # {title}
       </Typography>

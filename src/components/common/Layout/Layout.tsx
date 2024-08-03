@@ -12,9 +12,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
   return (
     <>
       {isMobile ? (
-        <Box mx={2} mb={4}>
-          {children}
-        </Box>
+        <>{children}</>
       ) : (
         <Box>
           <Typography>TODO</Typography>
