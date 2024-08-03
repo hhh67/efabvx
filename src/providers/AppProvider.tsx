@@ -1,5 +1,6 @@
 import theme from '@/theme';
 import { ThemeProvider } from '@emotion/react';
+import { CssBaseline } from '@mui/material';
 import { HelmetProvider } from 'react-helmet-async';
 
 type AppProviderProps = {
@@ -11,7 +12,10 @@ export const AppProvider: React.FC<AppProviderProps> = ({
 }: AppProviderProps) => {
   return (
     <HelmetProvider>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
     </HelmetProvider>
   );
 };
