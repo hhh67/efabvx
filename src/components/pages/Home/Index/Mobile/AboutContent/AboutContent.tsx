@@ -13,7 +13,7 @@ export const AboutContent: React.FC = () => {
       <AccordionSection title={'🍎　Apps'}>
         <Stack direction={'column'} spacing={2}>
           <Typography variant="body2">
-            個人で開発したアプリケーションの一覧です。
+            個人で開発しているアプリケーションの一覧です。
           </Typography>
           <Typography variant="body2">
             企画、デザイン、開発、運用まで
