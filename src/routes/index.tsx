@@ -22,7 +22,7 @@ export const router = createBrowserRouter(
       }
       errorElement={<Typography>error</Typography>}
     >
-      <Route path="/*" element={<HomeRoutes />} />
+      <Route path="/" element={<HomeRoutes />} />
       <Route path="qiita-reader/*" element={<QiitaReaderRoutes />} />
       <Route path="moon-pfase/*" element={<MoonPfaseRoutes />} />
       <Route path="picgle/*" element={<PicgleRoutes />} />
