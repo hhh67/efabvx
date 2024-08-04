@@ -75,7 +75,7 @@ export const SkillsSection: React.FC = () => {
         </Typography>
       </Box>
 
-      <Stack direction={'column'} spacing={4} width={'90%'} mx={'auto'}>
+      <Stack direction={'column'} spacing={4}>
         {/* Frontend */}
         <Stack direction={'column'} spacing={1}>
           <SkillHeader title={'Frontend'} icon={frontendIcon} />

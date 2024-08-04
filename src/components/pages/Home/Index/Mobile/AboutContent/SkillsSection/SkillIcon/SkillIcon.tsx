@@ -30,10 +30,10 @@ export const SkillIcon: React.FC<SkillIconProps> = ({
         alignItems={'center'}
         item
         xs={2.4}
-        sm={2.4}
-        md={2.4}
-        lg={2.4}
-        xl={2.4}
+        sm={2}
+        md={1}
+        lg={1}
+        xl={1}
         height={'54px'}
         aria-owns={open ? 'mouse-over-popover' : undefined}
         aria-haspopup="true"
