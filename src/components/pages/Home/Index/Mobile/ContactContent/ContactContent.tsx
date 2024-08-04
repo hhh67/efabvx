@@ -8,7 +8,7 @@ export const ContactContent: React.FC = () => {
     <>
       <Typography variant="body2">メールにて承ります。</Typography>
       <Typography variant="body2">
-        と言いつつ各種SNSのDMでも承っております。
+        と言いつつ各種SNSのDMでも承ります。
       </Typography>
       <SnsCard
         sns={{
