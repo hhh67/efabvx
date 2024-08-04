@@ -31,7 +31,7 @@ export const AppCard: React.FC<AppCardProps> = ({
             component="img"
             src={app.iconSrc}
             alt={app.displayName}
-            width="60px"
+            width="54px"
             borderRadius={1.5}
           />
         }
@@ -43,7 +43,7 @@ export const AppCard: React.FC<AppCardProps> = ({
         title={app.displayName}
       />
       <CardContent>
-        <Stack direction={'column'} spacing={2}>
+        <Stack direction={'column'} spacing={1}>
           <Typography variant="body2" px={1} textAlign={'left'}>
             {app.description}
           </Typography>
@@ -59,7 +59,7 @@ export const AppCard: React.FC<AppCardProps> = ({
                 component="img"
                 src={AppStoreLogo}
                 alt="App Store"
-                width="120px"
+                width="110px"
                 justifySelf={'flex-start'}
                 sx={{ alignSelf: 'center' }}
               />

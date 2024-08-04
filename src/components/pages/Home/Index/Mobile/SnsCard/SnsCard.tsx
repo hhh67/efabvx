@@ -22,7 +22,7 @@ export const SnsCard: React.FC<SnsCardProps> = ({
       component={'a'}
       target="_blank"
       rel="noopener noreferrer"
-      sx={{ textDecoration: 'none' }}
+      sx={{ textDecoration: 'none', '&:hover': { opacity: 0.5 } }}
     >
       <Card variant="outlined" sx={{ background: background }}>
         <Stack

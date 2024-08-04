@@ -86,6 +86,10 @@ const theme: Theme = createTheme({
       styleOverrides: {
         root: {
           paddingTop: 0,
+          paddingBottom: 8,
+          ':last-child': {
+            paddingBottom: 8,
+          },
         },
       },
     },
