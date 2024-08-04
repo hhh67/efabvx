@@ -1,5 +1,5 @@
+import { ErrorElement } from '@/components/common/ErrorElement';
 import { Layout } from '@/components/common/Layout/Layout';
-import { Typography } from '@mui/material';
 import {
   Outlet,
   Route,
@@ -20,7 +20,7 @@ export const router = createBrowserRouter(
           <Outlet />
         </Layout>
       }
-      errorElement={<Typography>error</Typography>}
+      errorElement={<ErrorElement />}
     >
       <Route path="/" element={<HomeRoutes />} />
       <Route path="qiita-reader/*" element={<QiitaReaderRoutes />} />
