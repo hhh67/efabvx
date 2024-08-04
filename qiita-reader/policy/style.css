@@ -1,0 +1,93 @@
+/* 
+    ダークモード
+*/
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000;
+        color: #fff;
+        margin-bottom: 6vh;
+    }
+
+    .mailto {
+        color: #0099ff
+    }
+}
+
+/*
+    キャレットアニメーション
+*/
+@keyframes caret {
+
+    0%,
+    49% {
+        opacity: 0;
+    }
+
+    50%,
+    100% {
+        opacity: 1;
+    }
+}
+
+.caret {
+    display: inline-block;
+    animation: caret 1s infinite;
+}
+
+.caret::before {
+    content: '|'
+}
+
+/*
+    レイアウト
+*/
+h1 {
+    font-family: 'Fragment Mono', monospace;
+    color: #49BE02;
+}
+
+body {
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+main {
+    margin-top: 3rem;
+}
+
+h2 {
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+dl {
+    margin-bottom: 2.4rem;
+}
+
+dt {
+    margin-bottom: .5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+dd {
+    font-size: 0.85rem;
+    margin-left: 1.6rem;
+}
+
+#lastUpdatedDate {
+    font-size: .8rem;
+    color: #888;
+}
+
+.example-text {
+    opacity: 0.5;
+}
+
+h2,
+p,
+span,
+dl,
+.mailto {
+    font-family: 'メイリオ', 'Meiryo', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
+}

@@ -1,0 +1,91 @@
+body {
+    background-color: #EEEEFF;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    font-family: 'Courier New', Courier, monospace;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+body>div {
+    width: 98%;
+    margin: auto;
+}
+
+.logo-img {
+    margin-top: 4vh;
+    margin-left: -2vw;
+}
+
+.logo-title {
+    font-size: 5vw;
+    margin-top: 1vh;
+    letter-spacing: 0.5vw;
+    font-weight: 100;
+    margin-left: 2vw;
+
+}
+
+main {
+    margin-top: 3rem;
+}
+
+.ss-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.ss-container>img {
+    object-fit: contain;
+    max-height: 60vh;
+}
+
+.store-link-container {
+    width: 100%;
+    margin-top: 7vh;
+    margin-bottom: 5vh;
+    text-align: center;
+}
+
+.sns {
+    text-align: center;
+    margin-top: 10vh;
+}
+
+.instagram-media {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+h2 {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+h2>img {
+    width: 3.5vw;
+    object-fit: contain;
+}
+
+h2>span {
+    font-size: 3.5vw;
+    margin-left: 1vw;
+}
+
+/* 
+    ダークモード
+*/
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000011;
+        color: #fff;
+        margin-bottom: 6vh;
+    }
+
+    .mailto {
+        color: #0099ff
+    }
+}
