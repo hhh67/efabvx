@@ -1,4 +1,5 @@
 import { MoonPfase } from '@/components/pages/MoonPfase/Index';
+import { Policy } from '@/components/pages/MoonPfase/Policy';
 import { Helmet } from 'react-helmet-async';
 import { Route, Routes } from 'react-router-dom';
 
@@ -10,6 +11,7 @@ export const MoonPfaseRoutes = (): JSX.Element => {
       </Helmet>
       <Routes>
         <Route path="/" element={<MoonPfase />}></Route>
+        <Route path="policy" element={<Policy />}></Route>
       </Routes>
     </>
   );
