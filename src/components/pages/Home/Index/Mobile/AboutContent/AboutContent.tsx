@@ -4,6 +4,7 @@ import { Stack, Typography } from '@mui/material';
 import { AccordionSection } from '../AccordionSection';
 import { AppCard } from '../AppCard';
 import { SnsCard } from '../SnsCard';
+import { SkillsSection } from './SkillsSection';
 
 export const AboutContent: React.FC = () => {
   return (
@@ -60,6 +61,9 @@ export const AboutContent: React.FC = () => {
           />
         </Stack>
       </AccordionSection>
+
+      {/* 🧠 Skills */}
+      <SkillsSection />
 
       {/* 🌏 SNS */}
       <AccordionSection title={'🌏　SNS'}>

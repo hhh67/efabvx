@@ -30,8 +30,8 @@ export const ProfileContent: React.FC = () => {
       >
         <Stack direction={'row'} spacing={2} alignItems={'center'}>
           <Box
-            width={'70px'}
-            height={'70px'}
+            width={'84px'}
+            height={'84px'}
             borderRadius={9999}
             border={'4px solid'}
             borderColor={'#aa33aa'}
@@ -40,14 +40,14 @@ export const ProfileContent: React.FC = () => {
               <Box
                 component="img"
                 src={gumi}
-                width={'100%'}
+                width={'76px'}
                 onClick={() => setFlipped(!flipped)}
                 onDrag={() => setFlipped(!flipped)}
               />
               <Box
                 component="img"
                 src={hoshino}
-                width={'100%'}
+                width={'76px'}
                 onClick={() => setFlipped(!flipped)}
                 onDrag={() => setFlipped(!flipped)}
               />
