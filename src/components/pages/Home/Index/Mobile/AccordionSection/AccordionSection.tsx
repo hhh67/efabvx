@@ -1,3 +1,4 @@
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
   Accordion,
@@ -18,8 +19,12 @@ export const AccordionSection: React.FC<AccordionSectionProps> = ({
   defaultExpanded = false,
   children,
 }: AccordionSectionProps) => {
+  const isMobile = useMediaQuery();
+
+  const expanded = !isMobile ? true : defaultExpanded;
+
   return (
-    <Accordion defaultExpanded={defaultExpanded} disableGutters square>
+    <Accordion defaultExpanded={expanded} disableGutters square>
       <AccordionSummary expandIcon={<ChevronRightIcon />}>
         <Stack
           direction={'row'}

@@ -8,7 +8,7 @@ import { SkillsSection } from './SkillsSection';
 
 export const AboutContent: React.FC = () => {
   return (
-    <Stack direction={'column'} spacing={1}>
+    <Stack direction={'column'} spacing={2}>
       {/* 🍎 Apps */}
       <AccordionSection title={'🍎　Apps'}>
         <Stack direction={'column'} spacing={2}>

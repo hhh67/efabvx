@@ -6,7 +6,7 @@ import { Section } from './Section';
 
 export const Mobile: React.FC = () => {
   return (
-    <Stack direction={'column'} spacing={2}>
+    <Stack direction={'column'} spacing={2} pb={4}>
       {/* 🐱 Profile */}
       <ProfileContent />
 
