@@ -6,7 +6,7 @@ export const HomeRoutes = (): JSX.Element => {
   return (
     <>
       <Helmet>
-        <title>Home</title>
+        <title>👋こんにちは</title>
       </Helmet>
       <Routes>
         <Route path="/" element={<Home />}></Route>
