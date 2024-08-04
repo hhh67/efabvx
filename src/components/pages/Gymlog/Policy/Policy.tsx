@@ -1,13 +1,14 @@
 import { PolicyLayout } from '@/components/common/Layout/PolicyLayout';
+import { ContactDescription } from '@/components/common/Policy/ContactDescription/ContactDescription';
 import { DefinitionDescription } from '@/components/common/Policy/DefinitionDescription';
 import { ExampleTypography } from '@/components/common/Policy/DefinitionDescription/ExampleTypography';
 import { DescriptionList } from '@/components/common/Policy/DescriptionList';
 import { DescriptionTerm } from '@/components/common/Policy/DescriptionTerm';
-import { Link, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 export const Policy: React.FC = () => {
   return (
-    <PolicyLayout>
+    <PolicyLayout title="ジムログ">
       <DescriptionList>
         <DescriptionTerm term="1. 個人情報の管理" />
         <DefinitionDescription>
@@ -53,22 +54,7 @@ export const Policy: React.FC = () => {
           利用上の不具合に関しましては可能な範囲でサポートを行なっておりますが、利用者が本アプリを利用して生じた障害に関して、開発元は責任を負わないものとします。
         </DefinitionDescription>
 
-        <DescriptionTerm term="5. お問い合わせ" />
-        <DefinitionDescription>
-          <Stack direction="column" spacing={1}>
-            <Typography>
-              本ポリシーに関するお問い合わせは、下記のメールアドレスまでご連絡ください。
-            </Typography>
-            <Link
-              component={'a'}
-              href="mailto:efabvx@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              efabvx@gmail.com
-            </Link>
-          </Stack>
-        </DefinitionDescription>
+        <ContactDescription order={5} />
       </DescriptionList>
     </PolicyLayout>
   );
