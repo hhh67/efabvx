@@ -6,7 +6,7 @@ import { AppCard } from '../AppCard';
 import { SnsCard } from '../SnsCard';
 import { SkillsSection } from './SkillsSection';
 
-export const MoreContent: React.FC = () => {
+export const AboutContent: React.FC = () => {
   return (
     <Stack direction={'column'} spacing={2}>
       {/* 🍎 Apps */}
