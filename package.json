@@ -12,8 +12,9 @@
     "format": "prettier --write ./src",
     "rm": "rm -rf docs",
     "mv": "mv dist docs",
+    "cp": "cp dist/index.html dist/404.html",
     "git": "git add . && git commit -m 'deploy' && git push",
-    "deploy": "npm run rm && npm run build && npm run mv && npm run git"
+    "deploy": "npm run rm && npm run build && npm run mv && npm run cp && npm run git"
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",
