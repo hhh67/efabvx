@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: mode === 'development' ? true : false,
   },
+  publicDir: 'public',
   resolve: {
     alias: {
       '@': path.join(__dirname, 'src'),
