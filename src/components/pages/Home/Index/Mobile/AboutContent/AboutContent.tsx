@@ -10,7 +10,7 @@ export const AboutContent: React.FC = () => {
   return (
     <Stack direction={'column'} spacing={2}>
       {/* 🍎 Apps */}
-      <AccordionSection title={'🍎　Apps'}>
+      <AccordionSection title={'🍎　Apps'} defaultExpanded>
         <Stack direction={'column'} spacing={2}>
           <Typography variant="body2">
             個人で開発しているアプリケーションの一覧です。
