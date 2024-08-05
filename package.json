@@ -12,7 +12,7 @@
     "format": "prettier --write ./src",
     "rm": "rm -rf docs",
     "mv": "mv dist docs",
-    "git": "git add . && git commit -m 'deploy' && git push origin main",
+    "git": "git add . && git commit -m 'deploy' && git push",
     "deploy": "npm run rm && npm run build && npm run mv && npm run git"
   },
   "dependencies": {
