@@ -13,9 +13,8 @@
     "rm": "rm -rf docs",
     "mv": "mv dist docs",
     "cp": "cp dist/index.html dist/404.html",
-    "qr": "rm -rf dist/qiita-reader && mkdir dist/public && cp -r public/qiita-reader dist/public/qiita-reader",
     "git": "git add . && git commit -m 'deploy' && git push",
-    "deploy": "npm run rm && npm run build && npm run cp && npm run qr && npm run mv && npm run git"
+    "deploy": "npm run rm && npm run build && npm run cp && npm run mv && npm run git"
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",
