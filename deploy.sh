@@ -1,17 +1,15 @@
 rm -rf docs
 
-npm run build 
+bun run build 
 
-touch dist/CNAME
-echo "efabvx.com" > dist/CNAME
+touch docs/CNAME
+echo "efabvx.com" > docs/CNAME
 
-mkdir dist/public
-mv dist/qiita-reader dist/public
+mkdir docs/public
+mv docs/qiita-reader docs/public
 
-cp dist/index.html dist/404.html
-cp public/ogp.png dist/ogp.png
-
-mv dist docs
+cp docs/index.html docs/404.html
+cp public/ogp.png docs/ogp.png
 
 git add .
 git commit -m "deploy"

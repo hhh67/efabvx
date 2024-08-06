@@ -20,6 +20,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
+    outDir: 'docs',
     sourcemap: 'hidden',
     rollupOptions: {
       output: {
