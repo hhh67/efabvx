@@ -2,8 +2,7 @@ import { APP, SNS } from '@/constants';
 import theme from '@/theme';
 import { Stack, Typography } from '@mui/material';
 import { AccordionSection } from '../AccordionSection';
-import { AppCard } from '../AppCard';
-import { SnsCard } from '../SnsCard';
+import { LinkCard } from '../LinkCard';
 import { SkillsSection } from './SkillsSection';
 
 export const AboutContent: React.FC = () => {
@@ -23,41 +22,45 @@ export const AboutContent: React.FC = () => {
           <Typography variant="body2">
             詳細は各アプリのページをご覧ください。
           </Typography>
-          <AppCard
-            app={{
-              displayName: APP.QIITA_READER.DISPLAY_NAME,
-              description: APP.QIITA_READER.DESCRIPTION,
+          <LinkCard
+            detail={{
+              description: APP.QIITA_READER.DISPLAY_NAME,
               iconSrc: APP.QIITA_READER.ICON_SRC,
-              storeId: APP.QIITA_READER.STORE_ID,
+              url: APP.QIITA_READER.URL,
             }}
+            variant="dark"
             background={theme.palette.background.qiitaReader}
+            rounded={false}
           />
-          <AppCard
-            app={{
-              displayName: APP.GYMLOG.DISPLAY_NAME,
-              description: APP.GYMLOG.DESCRIPTION,
+          <LinkCard
+            detail={{
+              description: APP.GYMLOG.DISPLAY_NAME,
               iconSrc: APP.GYMLOG.ICON_SRC,
-              storeId: APP.GYMLOG.STORE_ID,
+              url: APP.GYMLOG.URL,
             }}
+            variant="dark"
             background={theme.palette.background.gymlog}
+            rounded={false}
           />
-          <AppCard
-            app={{
-              displayName: APP.MOON_PFASE.DISPLAY_NAME,
-              description: APP.MOON_PFASE.DESCRIPTION,
+          <LinkCard
+            detail={{
+              description: APP.MOON_PFASE.DISPLAY_NAME,
               iconSrc: APP.MOON_PFASE.ICON_SRC,
-              storeId: APP.MOON_PFASE.STORE_ID,
+              url: APP.MOON_PFASE.URL,
             }}
+            variant="dark"
             background={theme.palette.background.moonPfase}
+            rounded={false}
           />
-          <AppCard
-            app={{
-              displayName: APP.PICGLE.DISPLAY_NAME,
-              description: APP.PICGLE.DESCRIPTION,
+          <LinkCard
+            detail={{
+              description: APP.PICGLE.DISPLAY_NAME,
               iconSrc: APP.PICGLE.ICON_SRC,
-              storeId: APP.PICGLE.STORE_ID,
+              url: APP.PICGLE.URL,
             }}
+            variant="dark"
             background={theme.palette.background.picgle}
+            rounded={false}
           />
         </Stack>
       </AccordionSection>
@@ -71,8 +74,8 @@ export const AboutContent: React.FC = () => {
           <Typography variant="body2">
             フォローしていただけると泣いて喜びます
           </Typography>
-          <SnsCard
-            sns={{
+          <LinkCard
+            detail={{
               description: SNS.INSTAGRAM.DESCRIPTION,
               iconSrc: SNS.INSTAGRAM.ICON_SRC,
               url: SNS.INSTAGRAM.URL,
@@ -80,8 +83,8 @@ export const AboutContent: React.FC = () => {
             variant="light"
             background={theme.palette.background.instagram}
           />
-          <SnsCard
-            sns={{
+          <LinkCard
+            detail={{
               description: SNS.X.DESCRIPTION,
               iconSrc: SNS.X.ICON_SRC,
               url: SNS.X.URL,
@@ -89,8 +92,8 @@ export const AboutContent: React.FC = () => {
             variant="light"
             background={theme.palette.background.x}
           />
-          <SnsCard
-            sns={{
+          <LinkCard
+            detail={{
               description: SNS.GITHUB.DESCRIPTION,
               iconSrc: SNS.GITHUB.ICON_SRC,
               url: SNS.GITHUB.URL,
@@ -98,8 +101,8 @@ export const AboutContent: React.FC = () => {
             variant="dark"
             background={theme.palette.background.github}
           />
-          <SnsCard
-            sns={{
+          <LinkCard
+            detail={{
               description: SNS.QIITA.DESCRIPTION,
               iconSrc: SNS.QIITA.ICON_SRC,
               url: SNS.QIITA.URL,

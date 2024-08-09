@@ -1,24 +1,26 @@
 import blankIconDark from '@/images/blankIconDark.png?url';
 import blankIconLignt from '@/images/blankIconLight.png?url';
 import { Box, Card, Link, Stack, Typography } from '@mui/material';
-type SnsCardProps = {
-  sns: {
+type LinkCardProps = {
+  detail: {
     description: string;
     iconSrc: any;
     url: string;
   };
   background: string;
   variant: 'light' | 'dark';
+  rounded?: boolean;
 };
 
-export const SnsCard: React.FC<SnsCardProps> = ({
-  sns,
+export const LinkCard: React.FC<LinkCardProps> = ({
+  detail,
   background,
   variant,
-}: SnsCardProps) => {
+  rounded = true,
+}: LinkCardProps) => {
   return (
     <Link
-      href={sns.url}
+      href={detail.url}
       component={'a'}
       target="_blank"
       rel="noopener noreferrer"
@@ -34,9 +36,10 @@ export const SnsCard: React.FC<SnsCardProps> = ({
           <Stack direction={'row'} spacing={2} alignItems={'center'}>
             <Box
               component="img"
-              src={sns.iconSrc}
-              alt={sns.description}
+              src={detail.iconSrc}
+              alt={detail.description}
               width="40px"
+              borderRadius={!rounded ? 1 : undefined}
             />
             <Typography
               variant="body1"
@@ -44,7 +47,7 @@ export const SnsCard: React.FC<SnsCardProps> = ({
               fontWeight={'bold'}
               color={variant === 'light' ? 'white' : 'black'}
             >
-              {sns.description}
+              {detail.description}
             </Typography>
           </Stack>
 

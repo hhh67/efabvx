@@ -1,7 +1,7 @@
 import { SNS } from '@/constants';
 import theme from '@/theme';
 import { Typography } from '@mui/material';
-import { SnsCard } from '../SnsCard';
+import { LinkCard } from '../LinkCard';
 
 export const ContactContent: React.FC = () => {
   return (
@@ -10,8 +10,8 @@ export const ContactContent: React.FC = () => {
       <Typography variant="body2">
         と言いつつ各種SNSのDMでも承ります。
       </Typography>
-      <SnsCard
-        sns={{
+      <LinkCard
+        detail={{
           description: SNS.MAIL.DESCRIPTION,
           iconSrc: SNS.MAIL.ICON_SRC,
           url: SNS.MAIL.URL,
