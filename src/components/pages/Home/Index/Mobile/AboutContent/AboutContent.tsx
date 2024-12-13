@@ -69,7 +69,7 @@ export const AboutContent: React.FC = () => {
       <SkillsSection />
 
       {/* 🌏 SNS */}
-      <AccordionSection title={'🌏　SNS'}>
+      <AccordionSection title={'🌏　SNS / Contact'}>
         <Stack direction={'column'} spacing={2}>
           <Typography variant="body2">
             フォローしていただけると泣いて喜びます
@@ -110,6 +110,15 @@ export const AboutContent: React.FC = () => {
             variant="light"
             background={theme.palette.background.qiita}
           />
+          <LinkCard
+          detail={{
+            description: SNS.MAIL.DESCRIPTION,
+            iconSrc: SNS.MAIL.ICON_SRC,
+            url: SNS.MAIL.URL,
+          }}
+          variant="light"
+          background={theme.palette.background.mail}
+        />
         </Stack>
       </AccordionSection>
     </Stack>

@@ -1,6 +1,5 @@
 import { Stack } from '@mui/material';
 import { AboutContent } from './AboutContent';
-import { ContactContent } from './ContactContent';
 import { ProfileContent } from './ProfileContent';
 import { Section } from './Section';
 
@@ -13,11 +12,6 @@ export const Mobile: React.FC = () => {
       {/* 🐈 About */}
       <Section title="About">
         <AboutContent />
-      </Section>
-
-      {/* ✉️ Contact */}
-      <Section title="Contact">
-        <ContactContent />
       </Section>
     </Stack>
   );
