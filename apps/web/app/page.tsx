@@ -3,6 +3,7 @@ import Card from '../components/card/Card';
 import { MagicUIButton } from '../components/magicui/Button';
 import { MagicUICard } from '../components/magicui/Card';
 import { AppShell, Stack, PrimaryNav, SiteFooter } from '@efabvx/ui';
+import { ProfileCard } from '../components/profile/ProfileCard';
 
 export default function Page() {
   const navItems = [
@@ -30,7 +31,8 @@ export default function Page() {
         期限目安: 1 週間以内。
       */}
       <Stack gap={5} /* padding は AppShell/PageContainer へ委譲済 */>
-        <h1>@efabvx リプレース進行中</h1>
+  <h1>@efabvx リプレース進行中</h1>
+  <ProfileCard />
 
         <Stack as="section" gap={4}>
           <h2>自前コンポーネント (Card)</h2>
