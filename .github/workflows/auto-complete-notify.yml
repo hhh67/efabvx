@@ -1,0 +1,52 @@
+name: Auto Comment 作業完了通知
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+      - 'fix/**'
+      - 'hotfix/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: auto-complete-notify-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 対象 PR を探索しコメント
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const ref = context.ref; // refs/heads/xxx
+            const branch = ref.replace('refs/heads/','');
+            const sha = context.sha;
+
+            // Open PRs where head matches this branch
+            const { data: prs } = await github.rest.pulls.list({ owner, repo, state: 'open', per_page: 50 });
+            const target = prs.find(pr => pr.head.ref === branch);
+            if(!target){
+              core.info(`No open PR for branch ${branch}. Skipping.`);
+              return;
+            }
+            const issue_number = target.number;
+
+            // Fetch last 20 comments to avoid duplicate for same commit
+            const { data: comments } = await github.rest.issues.listComments({ owner, repo, issue_number, per_page: 20 });
+            const marker = `[auto] 作業完了通知 ${sha}`;
+            if(comments.some(c => c.body.includes(marker))){
+              core.info('Comment for this commit already exists. Skip.');
+              return;
+            }
+
+            const body = `@hhh67 ${marker}\nブランチ: ${branch}\n最新コミット: ${sha}\n状態: 作業完了（自動コメント）`;
+            await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            core.info('Notification comment posted.');

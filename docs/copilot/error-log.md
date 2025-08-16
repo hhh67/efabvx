@@ -4,8 +4,9 @@
 
 ## フォーマット
 
-```md
+````md
 ### YYYY-MM-DD HH:MM (JST)
+
 種別: build | runtime | type | test | lint | other
 ブランチ: feature/xxx
 概要: 一行要約
@@ -14,11 +15,13 @@
 ```text
 <貼り付け>
 ```
+````
 
 原因分析:
 対処:
 再発防止/Follow-up:
-```
+
+````
 
 ---
 
@@ -26,13 +29,13 @@
 
 ### 2025-08-16 22:55 (JST)
 
-種別: build  
-ブランチ: feature/magicui-poc  
+種別: build
+ブランチ: feature/magicui-poc
 概要: Node 16 で Next.js 14 ビルド失敗
 
 ```text
 You are using Node.js 16.13.1. For Next.js, Node.js version >= v18.17.0 is required.
-```
+````
 
 原因分析:
 
@@ -89,3 +92,35 @@ Event handlers cannot be passed to Client Component props.
 再発防止/Follow-up:
 
 - インタラクティブ要素テンプレへ注記
+
+### 2025-08-16 23:05 (JST)
+
+種別: build  
+ブランチ: feature/magicui-poc  
+概要: Next.js dev 起動時に tailwindcss モジュール解決失敗
+
+```text
+Error: Cannot find module 'tailwindcss'
+Require stack:
+- .../next/dist/build/webpack/config/blocks/css/plugins.js
+...
+Import trace for requested module:
+./app/globals.css
+```
+
+原因分析:
+
+- tailwindcss / postcss / autoprefixer を apps/web 側 devDependencies にのみ追加し、ルート workspace で再インストール未実行。
+- Next.js の PostCSS ローダがワークスペース解決で root node_modules を参照し該当パッケージ未配置。
+- その後 bun 自体の再インストールが必要な状態 (キャッシュ破損) だった可能性。
+
+対処:
+
+- Bun 再セットアップ (再インストール) 後、lock / node_modules をクリーン (rm -rf node_modules bun.lockb) し再度 bun install。
+- tailwindcss/postcss/autoprefixer を再インストールし dev 再起動で解決。
+
+再発防止/Follow-up:
+
+- 手順化: 依存解決異常時は (1) lock+node_modules 削除 → (2) bun install → (3) 個別 add 再試行 → (4) 解決不可なら Bun 再インストール。
+- ワークスペース追加依存は root で統一管理し、apps 配下重複定義を避けるガイドを README / 運用規約へ追記予定。
+- tailwind 導入チェックリストを decision-log に追記予定。

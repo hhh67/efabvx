@@ -69,7 +69,8 @@ export const Button: React.FC<ButtonProps> = ({
         ...style,
       }}
       onFocus={(e) => {
-        e.currentTarget.style.boxShadow = '0 0 0 2px var(--color-bg-primary), 0 0 0 4px var(--color-accent)';
+        e.currentTarget.style.boxShadow =
+          '0 0 0 2px var(--color-bg-primary), 0 0 0 4px var(--color-accent)';
       }}
       onBlur={(e) => {
         e.currentTarget.style.boxShadow = 'none';

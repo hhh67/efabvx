@@ -7,14 +7,19 @@
 // [ ] コントラスト AA
 // [ ] モーション軽減対応
 // [ ] Story 追加案 TODO
-import * as React from 'react';
 import { tokens } from '@efabvx/ui';
+import * as React from 'react';
 
 type CardProps = React.HTMLAttributes<HTMLDivElement> & {
   interactive?: boolean;
 };
 
-export const Card: React.FC<CardProps> = ({ interactive, style, children, ...rest }) => {
+export const Card: React.FC<CardProps> = ({
+  interactive,
+  style,
+  children,
+  ...rest
+}) => {
   return (
     <div
       {...rest}
