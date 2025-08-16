@@ -7,7 +7,7 @@
 // [ ] モーション軽減対応
 // [ ] Story 追加案 TODO
 import * as React from 'react';
-import { tokens } from '@efabvx/ui/src/tokens';
+import { tokens } from '@efabvx/ui';
 
 type CardProps = React.HTMLAttributes<HTMLDivElement> & {
   interactive?: boolean;
