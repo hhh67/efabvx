@@ -1,3 +1,4 @@
+``````instructions
 `````instructions
 ````instructions
 以下のルールに必ず従え。
@@ -8,6 +9,20 @@
 ## Agent
 
 使用する開発者は全員が日本人で日本語を母国語とするため、AgentモードやChatでは常に日本語で回答せよ。
+
+---
+
+## フロントエンド再構築戦略 (Next.js 段階移行 B案)
+
+- 採用方針: 既存 Vite アプリを一時 "legacy" として温存しつつ、新規 Next.js (App Router) 実装を `/apps/web` (最終) へ段階移行する B 案をデフォルト戦略とする。以後確認不要でこの前提で進める。
+- ランタイム: Node 22 (`.nvmrc` で固定) + Bun (パッケージマネージャおよび実行)。
+- モノレポ: 将来的に `apps/` (web, legacy-vite), `packages/` (ui, config, types) 構成へ再編。初期段階では破壊的変更を避け、段階的にコード移動。
+- デザイン: Apple HIG 適用 + 自前 tokens 優先。MagicUI は PoC 比較 (Button / Card / アニメーション許容度 / アクセシビリティ) を行い、採否を decision-log に記録。
+- PoC 比較観点: 1) tokens への適合度 2) アクセシビリティ (フォーカス/コントラスト/キーボード) 3) バンドルサイズ差分 4) カスタマイズ容易性 5) パフォーマンス (初期描画 / インタラクション) 6) メンテナンス負債 (override量)。
+- 優先度: 既存 UI の横展開ではなく tokens + primitives (Button/Stack/PageContainer) を Next.js 側に先行実装 → 既存 Vite 画面を段階的に再構築 → legacy 削除。
+- 共有データ: アプリ/ SNS / Skills などの静的データは `packages/types` または `packages/ui/src/data` に集約し単一ソース化。
+- 減確認ポリシー: 明確な戦略内の標準ステップ (例: `.nvmrc` 追加, decision-log 更新, PoC 用ディレクトリ雛形生成) は個別 Y/N を省略し即時コミットする。逸脱や破壊的変更 (ディレクトリ大量移動 / 依存大幅追加) のみ明示確認。
+- CI 設計: Lint/Type/Test を Next.js / legacy 両方に対し段階的導入。Next.js 部分安定後 legacy 対象を縮小。
 
 ---
 
@@ -332,4 +347,4 @@ API:
 - 本運用自体の更新が必要になった場合は本ファイルへ先に追記し、その後ログに記録。
 
 ---
-`````
+``````
