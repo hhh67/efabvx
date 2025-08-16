@@ -4,6 +4,9 @@ import { MagicUIButton } from '../components/magicui/Button';
 import { MagicUICard } from '../components/magicui/Card';
 import { AppShell, Stack, PrimaryNav, SiteFooter } from '@efabvx/ui';
 import { ProfileCard } from '../components/profile/ProfileCard';
+import { Accordion } from '../components/about/Accordion';
+import { AppsSection } from '../components/about/AppsSection';
+import { SnsSection } from '../components/about/SnsSection';
 
 export default function Page() {
   const navItems = [
@@ -31,8 +34,14 @@ export default function Page() {
         期限目安: 1 週間以内。
       */}
       <Stack gap={5} /* padding は AppShell/PageContainer へ委譲済 */>
-  <h1>@efabvx リプレース進行中</h1>
-  <ProfileCard />
+        <h1>@efabvx リプレース進行中</h1>
+        <ProfileCard />
+        <Accordion title="🍎 Apps" defaultOpen>
+          <AppsSection />
+        </Accordion>
+        <Accordion title="🌏 SNS / Contact">
+          <SnsSection />
+        </Accordion>
 
         <Stack as="section" gap={4}>
           <h2>自前コンポーネント (Card)</h2>
