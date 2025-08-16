@@ -19,7 +19,9 @@ export const AppsSection = () => {
               rel="noopener noreferrer"
               style={{
                 textDecoration: 'none',
-                display: 'block',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 12,
                 padding: '12px 16px',
                 borderRadius: tokens.radius.card,
                 background: 'var(--color-bg-secondary)',
@@ -27,8 +29,21 @@ export const AppsSection = () => {
                 fontSize: tokens.typography.scale.small,
               }}
             >
-              <strong style={{ display: 'block' }}>{a.name}</strong>
-              <span style={{ opacity: 0.8 }}>{a.description}</span>
+              {/* アイコン */}
+              {a.icon && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={a.icon}
+                  alt=""
+                  width={40}
+                  height={40}
+                  style={{ borderRadius: 8, flexShrink: 0, background: 'var(--color-bg-elevated)' }}
+                />
+              )}
+              <span style={{ display: 'grid', gap: 2 }}>
+                <strong style={{ display: 'block', fontSize: tokens.typography.scale.small }}>{a.name}</strong>
+                <span style={{ opacity: 0.8 }}>{a.description}</span>
+              </span>
             </a>
           </li>
         ))}

@@ -101,3 +101,19 @@
 - PoC 残存期間が長引くと設計負債化 → 1 週間以内削除目標。
 - analyzer 未導入のまま依存が増えると比較困難。
 - a11y 自動化遅延は後工程修正コストを増加。
+
+### 追加 (2025-08-17 午後) 資産移行
+
+- 不足していたアプリ関連画像 (app icons / blankIcon / notFound / appStoreLogo) を `apps/web/public/images` へプレースホルダ追加。
+- `apps` データへ `icon` プロパティを追加し `AppsSection` で表示 (flex row + 40px アイコン)。
+- 実画像は後続で最終コピー予定 (現在 placeholder)。
+
+理由:
+
+- トップページのアプリ一覧で視覚的識別性を向上し、リプレース後の UI 欠落感を解消するため。
+
+TODO:
+
+- placeholder を本来の PNG / SVG に差し替え
+- 画像最適化 (サイズ圧縮 / `next/image` 置換検討)
+- ダーク/ライト両テーマでのコントラスト確認
