@@ -21,5 +21,7 @@
   ],
   "prettier.documentSelectors": ["**/*.{cjs,mjs,ts,tsx,json}"],
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.tsdk": "frontend/node_modules/typescript/lib"
+  "typescript.tsdk": "frontend/node_modules/typescript/lib",
+  "chat.tools.autoApprove": true,
+  "chat.agent.maxRequests": 100
 }
