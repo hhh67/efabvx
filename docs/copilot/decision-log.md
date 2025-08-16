@@ -102,7 +102,7 @@
 - analyzer 未導入のまま依存が増えると比較困難。
 - a11y 自動化遅延は後工程修正コストを増加。
 
-### 追加 (2025-08-17 午後) 資産移行
+### 資産移行プレースホルダ追加 (2025-08-17 午後)
 
 - 不足していたアプリ関連画像 (app icons / blankIcon / notFound / appStoreLogo) を `apps/web/public/images` へプレースホルダ追加。
 - `apps` データへ `icon` プロパティを追加し `AppsSection` で表示 (flex row + 40px アイコン)。

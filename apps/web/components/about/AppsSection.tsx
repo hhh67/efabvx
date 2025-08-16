@@ -1,6 +1,7 @@
 'use client';
 import { apps, Stack } from '@efabvx/ui';
 import { tokens } from '@efabvx/ui';
+import Image from 'next/image';
 
 export const AppsSection = () => {
   return (
@@ -31,12 +32,12 @@ export const AppsSection = () => {
             >
               {/* アイコン */}
               {a.icon && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={a.icon}
                   alt=""
                   width={40}
                   height={40}
+                  // アプリ名が直後にテキストで提供されるため alt は空: 冗長回避 (装飾的扱い)
                   style={{ borderRadius: 8, flexShrink: 0, background: 'var(--color-bg-elevated)' }}
                 />
               )}
