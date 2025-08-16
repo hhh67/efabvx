@@ -1,6 +1,7 @@
 import { Stack, PageContainer } from '@efabvx/ui';
 import { apps } from '@efabvx/ui';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function AppsPage() {
   return (
@@ -11,10 +12,8 @@ export default function AppsPage() {
         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 16 }}>
           {apps.map((a) => (
             <li key={a.key}>
-              <a
-                href={a.url}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href={`/apps/${a.key}`}
                 style={{
                   textDecoration: 'none',
                   display: 'flex',
@@ -39,7 +38,7 @@ export default function AppsPage() {
                   <strong style={{ fontSize: '1rem' }}>{a.name}</strong>
                   <span style={{ fontSize: '0.875rem', opacity: 0.85 }}>{a.description}</span>
                 </span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

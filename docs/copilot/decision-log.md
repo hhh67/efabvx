@@ -133,3 +133,4 @@ TODO:
 - skills データ構造定義 (packages/ui/src/data/skills.ts 予定)
 - apps 個別詳細 (スクリーンショット / ストアバッジ) セクション検討
 - skills データ構造 (icon 付きカテゴリ配列) を `packages/ui/src/data/skills.ts` に追加し `/skills` で利用開始。
+- アプリ詳細動的ルート `/apps/[key]` 追加し一覧/トップを内部リンク化 (App Store への直接遷移を詳細ページ経由へ変更)。

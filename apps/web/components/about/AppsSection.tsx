@@ -2,6 +2,7 @@
 import { apps, Stack } from '@efabvx/ui';
 import { tokens } from '@efabvx/ui';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const AppsSection = () => {
   return (
@@ -14,10 +15,8 @@ export const AppsSection = () => {
       <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 12 }}>
         {apps.map((a) => (
           <li key={a.key}>
-            <a
-              href={a.url}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={`/apps/${a.key}`}
               style={{
                 textDecoration: 'none',
                 display: 'flex',
@@ -45,7 +44,7 @@ export const AppsSection = () => {
                 <strong style={{ display: 'block', fontSize: tokens.typography.scale.small }}>{a.name}</strong>
                 <span style={{ opacity: 0.8 }}>{a.description}</span>
               </span>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
