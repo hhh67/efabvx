@@ -7,6 +7,7 @@ import { ProfileCard } from '../components/profile/ProfileCard';
 import { Accordion } from '../components/about/Accordion';
 import { AppsSection } from '../components/about/AppsSection';
 import { SnsSection } from '../components/about/SnsSection';
+import { SkillsSection } from '../components/skills/SkillsSection';
 
 export default function Page() {
   const navItems = [
@@ -38,6 +39,9 @@ export default function Page() {
         <ProfileCard />
         <Accordion title="🍎 Apps" defaultOpen>
           <AppsSection />
+        </Accordion>
+        <Accordion title="🧠 Skills">
+          <SkillsSection />
         </Accordion>
         <Accordion title="🌏 SNS / Contact">
           <SnsSection />
