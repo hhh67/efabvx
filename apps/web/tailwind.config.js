@@ -1,3 +1,6 @@
+import tokensTailwindPlugin from './plugins/tokens-tailwind-plugin.cjs';
+
+// NOTE: 現状は tokens を手動マッピング。次フェーズで自動生成スクリプト化予定。
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./app/**/*.{ts,tsx,js,jsx}', './components/**/*.{ts,tsx,js,jsx}'],
@@ -27,5 +30,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [tokensTailwindPlugin],
 };
