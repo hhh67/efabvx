@@ -1,3 +1,4 @@
+'use client';
 // [PoC自前Card]
 // [ ] tokens 再利用
 // [ ] フォーカス可視
