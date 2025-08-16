@@ -20,10 +20,11 @@
 
 ### TODO
 
-- tokens 初期実装
-- @ alias を tsconfig/vite に明示
-- Button/Stack/PageContainer 作成
-- Lint/Type CI 追加
+- tokens 初期実装 (完了)
+- @ alias を tsconfig/vite に明示 (一部完了 / web tsconfig 反映)
+- Button/Stack/PageContainer 作成 (完了)
+- Lint/Type/Test CI 追加 (未)
+- MagicUI PoC (Button/Card) 比較 → bundle/アクセシビリティ/カスタマイズ性評価 (未)
 
 ### メモ
 
