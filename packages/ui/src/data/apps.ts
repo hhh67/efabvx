@@ -1,6 +1,6 @@
 export const apps = [
   {
-    key: 'qiitaReader',
+  key: 'qiitaReader',
     name: 'QiitaReader',
     description: 'Qiitaをもっと快適に利用したい開発者のためのアプリ',
     url: 'https://apps.apple.com/jp/app/id6470926641',
