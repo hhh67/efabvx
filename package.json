@@ -4,13 +4,19 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "vite --mode development",
     "build": "tsc && vite build",
     "lint": "eslint ./src",
     "preview": "vite preview",
     "format": "prettier --write ./src",
-    "deploy": "sh deploy.sh"
+    "deploy": "sh deploy.sh",
+    "dev:legacy": "bun run --cwd apps/legacy-vite dev",
+    "dev:web": "bun run --cwd apps/web dev"
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",
