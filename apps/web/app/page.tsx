@@ -17,13 +17,8 @@ export default function Page() {
       header={
         <Stack direction="row" gap={6} align="center" style={{ justifyContent: 'space-between' }}>
           <div style={{ fontWeight: 600 }}>@efabvx</div>
-          <PrimaryNav
-            items={navItems}
-            onMoreClick={() => {
-              // TODO: More メニュー展開 (popover / sheet)
-              console.log('More menu clicked');
-            }}
-          />
+          {/* onMoreClick は Server->Client 関数シリアライズ制限のため一時削除 */}
+          <PrimaryNav items={navItems} />
         </Stack>
       }
       footer={<div>© {new Date().getFullYear()} efabvx</div>}

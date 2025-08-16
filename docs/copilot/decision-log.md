@@ -59,11 +59,13 @@
 
 - MagicUI PoC を完了扱いとし、以後 feature/magicui-poc ブランチ上では新規 PoC 拡張を行わずリプレース (AppShell 導入 / Navigation 移行) に移行。
 - PrimaryNav コンポーネント基礎実装 (モバイル簡易: 3項目 + More) を追加し Navigation フェーズ着手。
+- Server Component へ関数 props を渡したことによる 500 エラー解消のため page.tsx から PrimaryNav の onMoreClick を一時削除。
 
 ### 理由 (リプレース移行)
 
 - PoC 観点 (アクセシビリティ/初期パフォーマンス/カスタマイズ容易性) の定性確認完了。定量 (bundle) は後続独立タスク化。
 - HIG 準拠で最上位ナビゲーション項目を厳選し情報過多回避。
+- onMoreClick は現段階で未実装 (popover) かつ Server Component 制約に抵触したため一旦排除しエラー要因を単純化。
 
 ### TODO (Navigation 初期)
 
@@ -71,7 +73,7 @@
 - Navigation コンポーネント (PrimaryNav) 追加 (基礎実装完了 / More 展開残)
 - Footer の tokens 化 (inline style 排除)
 - bundle analyzer 導入 (未)
-- More 展開 UI (popover / sheet) 実装
+- More 展開 UI (popover / sheet) 実装 (Client 内完結)
 - Story 追加
 - a11y: More ボタン展開時のフォーカストラップ
 
