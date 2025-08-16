@@ -77,7 +77,27 @@
 - Story 追加
 - a11y: More ボタン展開時のフォーカストラップ
 
-### リスク / フォローアップ
+### 再初期化準備 (2025-08-17)
 
-- PoC コードが恒久化しないよう早期削除計画を別ブランチに切り出す必要。
-- More 展開未実装により 4+ 項目アクセス遷移が 1 クリック追加され UX 低下の暫定状態。早期解消。
+- 状況: Copilot ツール層で git コマンド出力が空になる現象を複数回確認。内部状態不整合の可能性。
+- 対応方針: VSCode / Copilot 拡張を完全終了しキャッシュ退避後再起動 (decision: 直後の開発再開に備え要点/TODO を明示化)。
+- 本日までの追加実装: SiteFooter コンポーネント追加し page.tsx のフッター差し替え (tokens 再利用完了)。
+- PoC 状態: MagicUI ラップ(Button/Card) は比較目的達成 → page.tsx 内セクションを DEPRECATED マーク予定。
+
+### 再開直後の最優先 TODO
+
+1. page.tsx の PoC セクションへ `DEPRECATED:` コメント追記 → 後続ブランチで削除計画作成
+2. PrimaryNav "More" メニュー実装 (popover + focus trap + Esc close / キーボード循環)
+3. @next/bundle-analyzer 導入し baseline 出力 (サイズ差分記録)
+4. a11y 自動テスト (axe) スクリプト追加 (`pnpm test:a11y` 相当) / CI 組込準備
+5. design tokens -> Tailwind theme 同期プラグイン (単一ソース化)
+6. Storybook or MDX ドキュメント基盤検討 (Button / Stack / PageContainer / PrimaryNav / SiteFooter)
+7. motion.d.ts を公式型 (motion one) へ置換 / 一時型削除
+8. Footer: 外部リンク拡張 (複数リンク / i18n messages 経由化)
+9. PoC コンポーネント削除用ブランチ切り出し (feature/remove-poc) 計画ドキュメント化
+
+### フォローアップ / リスク
+
+- PoC 残存期間が長引くと設計負債化 → 1 週間以内削除目標。
+- analyzer 未導入のまま依存が増えると比較困難。
+- a11y 自動化遅延は後工程修正コストを増加。

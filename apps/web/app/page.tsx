@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../components/card/Card';
 import { MagicUIButton } from '../components/magicui/Button';
 import { MagicUICard } from '../components/magicui/Card';
-import { AppShell, Stack, PrimaryNav } from '@efabvx/ui';
+import { AppShell, Stack, PrimaryNav, SiteFooter } from '@efabvx/ui';
 
 export default function Page() {
   const navItems = [
@@ -21,7 +21,7 @@ export default function Page() {
           <PrimaryNav items={navItems} />
         </Stack>
       }
-      footer={<div>© {new Date().getFullYear()} efabvx</div>}
+      footer={<SiteFooter links={[{ label: 'GitHub', href: 'https://github.com/hhh67', external: true }]} />}
     >
       {/* TODO: PoC セクション削除予定 */}
       <Stack gap={5} /* padding は AppShell/PageContainer へ委譲済 */>

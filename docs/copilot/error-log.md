@@ -124,3 +124,28 @@ Import trace for requested module:
 - 手順化: 依存解決異常時は (1) lock+node_modules 削除 → (2) bun install → (3) 個別 add 再試行 → (4) 解決不可なら Bun 再インストール。
 - ワークスペース追加依存は root で統一管理し、apps 配下重複定義を避けるガイドを README / 運用規約へ追記予定。
 - tailwind 導入チェックリストを decision-log に追記予定。
+
+### 2025-08-17 10:05 (JST)
+
+種別: other  
+ブランチ: feature/project-replace  
+概要: Copilot ツール層で git コマンド出力が常に空
+
+```text
+(例) git status / git rev-parse / git commit などの実行で標準出力が空
+```
+
+原因分析:
+
+- VSCode 拡張レイヤ or 実行サンドボックスの一時的不整合 / 権限問題の可能性
+- 実リポジトリ側ではブランチ操作は正常と推測されるが、エージェント層で結果が捕捉できていない
+
+対処:
+
+- 再起動 (VSCode / Copilot 拡張) 計画。再開容易化のため decision-log に再開タスク列挙。
+
+再発防止/Follow-up:
+
+- 再起動後も再現する場合: Developer Tools Console / Copilot 出力ログ収集し次エントリに追加
+- 必要なら拡張キャッシュ退避 (globalStorage/github.copilot) → 再インストール
+- 継続する場合は Git 操作をローカル端末で直接実行しエージェントとの役割分離を明記

@@ -7,3 +7,4 @@ export * from './data/sns';
 export * from './tokens';
 export * from './components/layout/AppShell';
 export * from './components/navigation/PrimaryNav';
+export * from './components/layout/SiteFooter';
