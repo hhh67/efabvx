@@ -7,6 +7,7 @@
 // [x] コントラスト AA (tokens)
 // [x] モーション軽減対応 (prefers-reduced-motion で hover 背景のみ最小)
 // [ ] Story 追加案 TODO
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { tokens } from '../../tokens';
 import { Stack } from '../primitives/Stack';
 
@@ -19,13 +20,72 @@ export type PrimaryNavItem = {
 export type PrimaryNavProps = {
   items: PrimaryNavItem[];
   moreLabel?: string;
-  onMoreClick?: () => void;
 };
 
-export const PrimaryNav = ({ items, moreLabel = 'More', onMoreClick }: PrimaryNavProps) => {
+export const PrimaryNav = ({ items, moreLabel = 'More' }: PrimaryNavProps) => {
   const main = items.slice(0, 3);
   const rest = items.slice(3);
   const showMore = rest.length > 0;
+
+  const [open, setOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const firstRestRef = useRef<HTMLAnchorElement | null>(null);
+
+  const close = useCallback(() => setOpen(false), []);
+
+  // 閉じるトリガ (外側クリック)
+  useEffect(() => {
+    if (!open) return;
+    const onPointerDown = (e: MouseEvent) => {
+      if (!panelRef.current || !buttonRef.current) return;
+      if (panelRef.current.contains(e.target as Node) || buttonRef.current.contains(e.target as Node)) return;
+      close();
+    };
+    window.addEventListener('mousedown', onPointerDown);
+    return () => window.removeEventListener('mousedown', onPointerDown);
+  }, [open, close]);
+
+  // Esc キー閉じ
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        close();
+        buttonRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, close]);
+
+  // 開いたら最初のリンクへフォーカス
+  useEffect(() => {
+    if (open) firstRestRef.current?.focus();
+  }, [open]);
+
+  // フォーカストラップ (Shift+Tab / Tab 循環)
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+      if (!panelRef.current) return;
+      const focusables = Array.from(panelRef.current.querySelectorAll('a')) as HTMLElement[];
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (!first || !last) return;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
 
   return (
     <nav aria-label="Primary">
@@ -65,10 +125,14 @@ export const PrimaryNav = ({ items, moreLabel = 'More', onMoreClick }: PrimaryNa
           </li>
         ))}
         {showMore && (
-          <li>
+          <li style={{ position: 'relative' }}>
             <button
               type="button"
-              onClick={onMoreClick}
+              aria-haspopup="true"
+              aria-expanded={open}
+              aria-controls="nav-more-panel"
+              ref={buttonRef}
+              onClick={() => setOpen((o) => !o)}
               style={{
                 padding: '8px 12px',
                 fontSize: tokens.typography.scale.small,
@@ -86,6 +150,66 @@ export const PrimaryNav = ({ items, moreLabel = 'More', onMoreClick }: PrimaryNa
             >
               {moreLabel}
             </button>
+            {open && (
+              <div
+                id="nav-more-panel"
+                role="menu"
+                ref={panelRef}
+                style={{
+                  position: 'absolute',
+                  top: 'calc(100% + 4px)',
+                  right: 0,
+                  minWidth: 160,
+                  background: tokens.color.bg.elevated,
+                  borderRadius: tokens.radius.card,
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.12)',
+                  padding: '4px 4px',
+                  zIndex: 20,
+                }}
+              >
+                <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                  {rest.map((it, i) => (
+                    <li key={it.href}>
+                      <a
+                        ref={i === 0 ? firstRestRef : null}
+                        href={it.href}
+                        role="menuitem"
+                        style={{
+                          display: 'block',
+                          padding: '8px 10px',
+                          textDecoration: 'none',
+                          borderRadius: tokens.radius.base,
+                          fontSize: tokens.typography.scale.small,
+                          color: tokens.color.fg.secondary,
+                        }}
+                        onFocus={(e) => {
+                          e.currentTarget.style.background = tokens.color.bg.secondary;
+                        }}
+                        onBlur={(e) => {
+                          e.currentTarget.style.background = 'transparent';
+                        }}
+                        onMouseEnter={(e) => {
+                          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                          e.currentTarget.style.background = tokens.color.bg.secondary;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'transparent';
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Escape') {
+                            close();
+                            buttonRef.current?.focus();
+                          }
+                        }}
+                        onClick={() => close()}
+                      >
+                        {it.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </li>
         )}
       </Stack>
