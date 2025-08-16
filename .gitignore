@@ -23,3 +23,6 @@ dist-ssr
 *.sw?
 
 tmp
+
+# Next.js build output (不要なビルド成果物)
+.next
