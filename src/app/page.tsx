@@ -30,9 +30,7 @@ export default function Home() {
             Your Name
           </>
         }
-        subheading={
-          "Full-stack Developer / Engineer crafting immersive web experiences."
-        }
+        subheading={"Full Stack Developer"}
       />
     </>
   );
