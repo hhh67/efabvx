@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { ReactNode, useMemo, useState } from "react";
 import { Typewriter } from "../ui/Typewriter";
-import { Starfield } from "../visuals/Starfield";
 
 function TypewriterHeading() {
   const [firstDone, setFirstDone] = useState(false);
@@ -72,65 +71,60 @@ export function Hero({ heading, subheading, globeConfig }: HeroProps) {
   // Provide stable config reference
   const config = useMemo(() => globeConfig, [globeConfig]);
   return (
-    <section className="relative w-full h-screen flex flex-col lg:flex-row items-center justify-center overflow-hidden text-white">
-      {/* Star / space background layers */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <Starfield />
-        <canvas
-          id="starfield-canvas"
-          className="absolute inset-0 w-full h-full"
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(40,70,160,0.15),transparent_60%)] mix-blend-screen" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(150,50,200,0.08),transparent_65%)] mix-blend-screen" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0),rgba(0,0,0,0.55)_70%)]" />
+    <section className="relative w-full h-screen overflow-hidden text-white">
+      {/* Globe Background - PC: Right side, Mobile: Center */}
+      <div className="absolute inset-0 lg:left-1/2 flex justify-center items-center">
+        <div className="w-[min(90vw,90vh)] h-[min(90vw,90vh)] lg:w-[min(100vh,60vw)] lg:h-[min(100vh,60vw)]">
+          <World globeConfig={config} />
+        </div>
       </div>
 
-      {/* Left text content */}
-      <div className="relative z-10 pl-[15vw] py-16 flex flex-col gap-8">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-6xl font-bold leading-tight tracking-tight font-libre"
+      {/* Content Container */}
+      <div className="relative z-20 h-full flex items-center px-6 md:px-12 max-w-7xl mx-auto">
+        {/* Text content - PC: Left side, Mobile: Center with offset */}
+        <div
+          className="w-full lg:w-1/2 flex flex-col gap-8 max-w-[640px] lg:max-w-none 
+                        lg:items-start items-center text-left
+                        lg:translate-y-0 translate-y-16"
         >
-          {/* タイピング: "Hello, I'm" + 改行 + 名前 */}
-          <TypewriterHeading />
-        </motion.h1>
-        {subheading && (
-          <motion.p
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.8 }}
-            className="text-lg md:text-2xl text-slate-300 max-w-xl font-libre"
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-6xl font-bold leading-tight tracking-tight font-libre w-full text-left"
           >
-            {subheading}
-          </motion.p>
-        )}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="flex gap-4"
-        >
-          <a
-            href="#projects"
-            className="px-5 py-3 rounded-md bg-blue-600 hover:bg-blue-500 text-sm font-semibold transition-colors"
+            {/* タイピング: "Hello, I'm" + 改行 + 名前 */}
+            <TypewriterHeading />
+          </motion.h1>
+          {subheading && (
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, duration: 0.8 }}
+              className="text-lg md:text-2xl text-slate-300 font-libre w-full text-left"
+            >
+              {subheading}
+            </motion.p>
+          )}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="flex gap-4 w-full justify-start"
           >
-            View Projects
-          </a>
-          <a
-            href="#contact"
-            className="px-5 py-3 rounded-md border border-slate-600 hover:border-slate-400 text-sm font-semibold transition-colors"
-          >
-            Contact
-          </a>
-        </motion.div>
-      </div>
-
-      {/* Right Globe */}
-      <div className="relative flex-1 min-h-[520px] h-full w-full lg:w-[55%] xl:w-[50%] z-10">
-        <div className="absolute inset-0">
-          <World globeConfig={config} />
+            <a
+              href="#projects"
+              className="px-5 py-3 rounded-md bg-blue-600 hover:bg-blue-500 text-sm font-semibold transition-colors"
+            >
+              View Projects
+            </a>
+            <a
+              href="#contact"
+              className="px-5 py-3 rounded-md border border-slate-600 hover:border-slate-400 text-sm font-semibold transition-colors"
+            >
+              Contact
+            </a>
+          </motion.div>
         </div>
       </div>
     </section>

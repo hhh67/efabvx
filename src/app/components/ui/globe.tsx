@@ -23,8 +23,8 @@ declare module "@react-three/fiber" {
 
 extend({ ThreeGlobe: ThreeGlobe });
 
-// カメラ距離: 値を小さくして画面上の地球サイズを拡大
-const cameraZ = 250;
+// カメラ距離: 値を小さくして画面上の地球サイズを拡大（1.5倍サイズ）
+const cameraZ = 180;
 
 export type GlobeConfig = {
   pointSize?: number;
@@ -81,83 +81,90 @@ export function Globe({ globeConfig }: WorldProps) {
     }
   }, []);
 
-  // Build & enhance ocean material (lapis-lazuli style) when ready
+  // Build & enhance ocean material (marble-like style) when ready
   useEffect(() => {
     if (!globeRef.current || !isInitialized) return;
 
+    console.log("Applying marble shader to globe material"); // Debug log
+    
     const material = globeRef.current.globeMaterial() as MeshPhongMaterial;
-    const deepBase = globeConfig.globeColor || "#062860"; // deep royal / lapis base
-    material.color = new Color(deepBase);
-    material.emissive = new Color(globeConfig.emissive || "#061836");
-    material.emissiveIntensity = globeConfig.emissiveIntensity ?? 0.12;
-    material.shininess = 25; // slightly broader highlight (larger specular diameter)
-    material.specular = new Color("#2c4f9e"); // dimmer specular to avoid white hotspot
+    const oceanBase = globeConfig.globeColor || "#1e3a5f"; // ocean blue base
+    material.color = new Color(oceanBase);
+    material.emissive = new Color(globeConfig.emissive || "#0a1929");
+    material.emissiveIntensity = globeConfig.emissiveIntensity ?? 0.15;
+    material.shininess = 60; // higher shininess for water-like reflection
+    material.specular = new Color("#7fb3d3"); // bright water specular
 
-    // Inject custom shader only once
-    if (!(material as any)._lapisShader) {
-      (material as any)._lapisShader = true;
-      material.onBeforeCompile = (shader) => {
-        shader.uniforms.uFresnelStrength = { value: 0.28 }; // base fresnel
-        shader.uniforms.uFresnelTint = { value: new Color("#0d49c4") };
-        shader.uniforms.uDepthTint = { value: new Color("#03163a") };
-        shader.uniforms.uGoldColor = { value: new Color("#c9a64d") };
-        shader.uniforms.uGoldBaseDensity = { value: 0.03 }; // base probability
-        shader.uniforms.uGoldVariationAmp = { value: 0.02 }; // additive variation
-        shader.uniforms.uGoldStrength = { value: 0.9 };
+    // Correct onBeforeCompile implementation
+    material.onBeforeCompile = function(shader) {
+        console.log("onBeforeCompile called"); // Debug log
+        
+        // Add custom uniforms
+        shader.uniforms.uMarbleColor1 = { value: new Color("#ffffff") }; // pure white
+        shader.uniforms.uMarbleColor2 = { value: new Color("#888888") }; // medium gray
+        shader.uniforms.uMarbleColor3 = { value: new Color("#333333") }; // dark gray
+        shader.uniforms.uMarbleScale = { value: 0.8 }; // marble pattern scale
         shader.uniforms.uTime = { value: 0 };
-        shader.uniforms.uPhase = { value: 0 };
-        shader.uniforms.uPhaseSpeed = { value: 0.15 };
-        shader.uniforms.uSunDir = { value: new Color(1, 1, 1) }; // treated as direction
-        shader.uniforms.uDayInfluence = { value: 1.0 };
 
-        // capture view position for fresnel
+        // Modify vertex shader
         shader.vertexShader = shader.vertexShader.replace(
-          "void main() {",
-          "varying vec3 vWorldNormal; varying vec3 vWorldPos; void main(){ vWorldNormal = normalize(normalMatrix * normal); vWorldPos = (modelMatrix * vec4(position,1.0)).xyz;"
+          'void main() {',
+          `
+          varying vec3 vWorldPosition;
+          void main() {
+            vWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;
+          `
         );
 
-        shader.fragmentShader = shader.fragmentShader
-          .replace(
-            "void main() {",
-            `varying vec3 vWorldNormal; varying vec3 vWorldPos; uniform float uFresnelStrength; uniform vec3 uFresnelTint; uniform vec3 uDepthTint; uniform vec3 uGoldColor; uniform float uGoldBaseDensity; uniform float uGoldVariationAmp; uniform float uGoldStrength; uniform float uTime; uniform float uPhase; uniform float uPhaseSpeed; uniform vec3 uSunDir; uniform float uDayInfluence; void main(){`
-          )
-          .replace(
-            "gl_FragColor = vec4( outgoingLight, diffuseColor.a );",
-            `
-              // base lighting
-              vec3 N = normalize(vWorldNormal);
-              vec3 V = normalize(cameraPosition - vWorldPos);
-              float fres = pow(1.0 - max(dot(N,V),0.0), 2.0); // slightly softer fresnel rolloff
-              // depth darkening toward edges of sphere (approx using normal.y & N.z)
-              float depth = clamp(0.4 + 0.6 * (1.0 - max(N.y,0.0)), 0.0, 1.0);
-              vec3 depthMix = mix(outgoingLight, outgoingLight * uDepthTint, depth * 0.55);
-              // Soft highlight compression to avoid hard white circle
-              float lum = dot(depthMix, vec3(0.299,0.587,0.114));
-              float softLum = lum / (1.0 + lum * 0.9); // filmic-like tone map
-              depthMix *= softLum / max(lum, 1e-4);
-              vec3 fresTint = uFresnelTint * fres * uFresnelStrength;
+        // Modify fragment shader
+        shader.fragmentShader = shader.fragmentShader.replace(
+          'void main() {',
+          `
+          varying vec3 vWorldPosition;
+          uniform vec3 uMarbleColor1;
+          uniform vec3 uMarbleColor2;
+          uniform vec3 uMarbleColor3;
+          uniform float uMarbleScale;
+          uniform float uTime;
+          void main() {
+          `
+        );
 
-              // simple hash noise for specks (pyrite inclusions)
-              float phase = uPhase + uTime * uPhaseSpeed;
-              vec2 hv = fract(vWorldPos.xz * 0.05 + phase);
-              float h = fract(sin(dot(hv, vec2(127.1, 311.7))) * 43758.5453123);
-              float dynamicDensity = uGoldBaseDensity + uGoldVariationAmp * (0.5 + 0.5*sin(phase));
-              float viewTerm = pow(max(dot(N,V),0.0), 8.0);
-              float dayTerm = clamp(dot(N, normalize(uSunDir)), 0.0, 1.0);
-              // Gold specks brighter & more frequent on day side
-              float threshold = 1.0 - dynamicDensity;
-              float speckMask = step(threshold, h) * viewTerm;
-              float goldBoost = mix(0.35, 1.0, pow(dayTerm, 1.2)) * uDayInfluence;
-              vec3 gold = uGoldColor * speckMask * uGoldStrength * goldBoost;
-              vec3 enriched = depthMix + fresTint + gold; // marble removed
-              // preserve alpha
-              gl_FragColor = vec4(enriched, diffuseColor.a);
-            `
-          );
-        (material as any)._shaderRef = shader;
-      };
-      material.needsUpdate = true;
-    }
+        shader.fragmentShader = shader.fragmentShader.replace(
+          '#include <output_fragment>',
+          `
+          // Marble pattern
+          vec3 pos = vWorldPosition * uMarbleScale;
+          float t = uTime * 0.1;
+          
+          float pattern1 = sin(pos.x * 2.0 + t);
+          float pattern2 = cos(pos.y * 1.5 + t * 0.7);
+          float pattern3 = sin(pos.z * 1.8 + t * 0.5);
+          
+          float marble = (pattern1 + pattern2 + pattern3) * 0.33;
+          marble = (marble + 1.0) * 0.5; // normalize to 0-1
+          
+          vec3 marbleColor;
+          if (marble < 0.4) {
+            marbleColor = uMarbleColor1;
+          } else if (marble < 0.7) {
+            marbleColor = uMarbleColor2;
+          } else {
+            marbleColor = uMarbleColor3;
+          }
+          
+          // Mix with original color
+          outgoingLight = mix(outgoingLight, marbleColor, 0.7);
+          
+          #include <output_fragment>
+          `
+        );
+
+        // Store reference for animation
+        (material as any).userData.shader = shader;
+    };
+    
+    material.needsUpdate = true;
   }, [
     isInitialized,
     globeConfig.globeColor,
@@ -165,45 +172,14 @@ export function Globe({ globeConfig }: WorldProps) {
     globeConfig.emissiveIntensity,
   ]);
 
-  // Animate shader time for subtle gold speck shimmer & fresnel breathing
+  // Animate marble shader time
   useFrame(() => {
     if (!globeRef.current) return;
     const material: any = globeRef.current.globeMaterial();
-    const shader = material?._shaderRef;
+    const shader = material?.userData?.shader;
     if (shader?.uniforms?.uTime) {
-      // seconds
       const t = performance.now() * 0.001;
       shader.uniforms.uTime.value = t;
-      // Optional mild pulsation of fresnel strength (comment out if undesired)
-      if (shader.uniforms.uFresnelStrength) {
-        shader.uniforms.uFresnelStrength.value =
-          0.26 + Math.sin(t * 0.2) * 0.02;
-      }
-      // advance phase (could be separate but reuse time)
-      if (shader.uniforms.uPhase) shader.uniforms.uPhase.value = t * 0.05;
-      // update sun direction locally for day/night modulation
-      if (shader.uniforms.uSunDir) {
-        // approximate same sun calc (duplicated logic simplified)
-        const now = new Date();
-        const startYear = Date.UTC(now.getUTCFullYear(), 0, 0);
-        const dayIndex = Math.floor((now.getTime() - startYear) / 86400000);
-        const utcHour =
-          now.getUTCHours() +
-          now.getUTCMinutes() / 60 +
-          now.getUTCSeconds() / 3600;
-        const localHour =
-          (utcHour + (globeConfig.timeZoneOffsetHours || 0) + 24) % 24;
-        const decl = 23.44 * Math.sin(((2 * Math.PI) / 365) * (dayIndex - 81));
-        let subSolarLon = 180 - localHour * 15;
-        subSolarLon = ((subSolarLon + 540) % 360) - 180;
-        const latRad = (decl * Math.PI) / 180;
-        const lonRad = (subSolarLon * Math.PI) / 180;
-        const x = Math.cos(latRad) * Math.cos(lonRad);
-        const y = Math.sin(latRad);
-        const z = Math.cos(latRad) * Math.sin(lonRad);
-        // store in Color (vec3)
-        shader.uniforms.uSunDir.value.set(x, y, z);
-      }
     }
   });
 
@@ -285,7 +261,7 @@ export function World(props: WorldProps) {
 
     const latRad = (decl * Math.PI) / 180;
     const lonRad = (subSolarLon * Math.PI) / 180;
-    const r = 600; // distance of light from globe center
+    const r = 400; // distance of light from globe center (adjusted for closer camera)
     const x = r * Math.cos(latRad) * Math.cos(lonRad);
     const y = r * Math.sin(latRad);
     const z = r * Math.cos(latRad) * Math.sin(lonRad);
@@ -315,8 +291,8 @@ export function World(props: WorldProps) {
   const Terminator = () => {
     const uniforms = {
       sunDir: { value: new Vector3(0, 1, 0) },
-      nightStrength: { value: 0 }, // slightly less dark nights
-      softness: { value: 0.33 },
+      nightStrength: { value: 0.15 }, // much lighter night side
+      softness: { value: 0.5 }, // softer transition
     };
     return (
       <mesh scale={[1.01, 1.01, 1.01]} position={[0, 0, 0]}>
@@ -353,10 +329,10 @@ export function World(props: WorldProps) {
   return (
     <Canvas
       scene={scene}
-      camera={{ fov: 60, near: 0.1, far: 2000, position: [0, 0, cameraZ] }}
+      camera={{ fov: 80, near: 0.1, far: 2000, position: [0, 0, cameraZ] }}
     >
       <WebGLRendererConfig />
-      <ambientLight color={globeConfig.ambientLight} intensity={0.85} />
+      <ambientLight color={globeConfig.ambientLight} intensity={1.4} />
       {/* Dynamic sun (directional) light based on time & timezone */}
       <directionalLight
         ref={sunLightRef as any}
@@ -364,18 +340,28 @@ export function World(props: WorldProps) {
           globeConfig.directionalTopLight || globeConfig.directionalLeftLight
         }
         position={new Vector3(0, 400, 400)}
-        intensity={1.9}
+        intensity={2.8}
       />
-      {/* Optional static fill light for subtle shading */}
+      {/* Enhanced fill lights for better visibility */}
       <directionalLight
         color={globeConfig.directionalLeftLight}
         position={new Vector3(-300, -200, -300)}
-        intensity={0.55}
+        intensity={1.2}
+      />
+      <directionalLight
+        color="#ffffff"
+        position={new Vector3(300, 200, 300)}
+        intensity={0.8}
       />
       <pointLight
         color={globeConfig.pointLight}
         position={new Vector3(-200, 500, 200)}
-        intensity={0.8}
+        intensity={1.5}
+      />
+      <pointLight
+        color="#e3f2fd"
+        position={new Vector3(200, -300, -200)}
+        intensity={0.7}
       />
       <Globe globeConfig={globeConfig} />
       <Terminator />

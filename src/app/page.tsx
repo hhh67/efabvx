@@ -1,17 +1,22 @@
+import { SideNav } from "./components/layout/SideNav";
+import { AboutSection } from "./components/sections/About";
+import { ContactSection } from "./components/sections/Contact";
 import { Hero } from "./components/sections/Hero";
+import { ProjectsSection } from "./components/sections/Projects";
+import { TechStackSection } from "./components/sections/TechStack";
 
 export default function Home() {
   const globeConfig = {
     pointSize: 0,
-    globeColor: "#160747",
+    globeColor: "#2c5aa0", // brighter ocean blue
     showAtmosphere: true,
     atmosphereColor: "#FFFFFF",
     atmosphereAltitude: 0.1,
-    emissive: "#160747",
-    emissiveIntensity: 0.1,
+    emissive: "#1a365d", // brighter emissive
+    emissiveIntensity: 0.2, // increased intensity
     shininess: 0.9,
-    polygonColor: "#ab8c2eff",
-    ambientLight: "#38bdf8",
+    polygonColor: "#ffffffff", // brighter gold for land
+    ambientLight: "#87ceeb", // sky blue ambient
     directionalLeftLight: "#ffffff",
     directionalTopLight: "#ffffff",
     pointLight: "#ffffff",
@@ -21,17 +26,24 @@ export default function Home() {
   };
   return (
     <>
-      <Hero
-        globeConfig={globeConfig}
-        heading={
-          <>
-            <span className="text-blue-400">Hello, I'm</span>
-            <br />
-            Your Name
-          </>
-        }
-        subheading={"Full Stack Developer"}
-      />
+      <SideNav />
+      <div id="top">
+        <Hero
+          globeConfig={globeConfig}
+          heading={
+            <>
+              <span className="text-blue-400">Hello, I'm</span>
+              <br />
+              Your Name
+            </>
+          }
+          subheading={"Full Stack Developer"}
+        />
+      </div>
+      <AboutSection />
+      <TechStackSection />
+      <ProjectsSection />
+      <ContactSection />
     </>
   );
 }
