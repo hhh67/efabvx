@@ -17,13 +17,14 @@ export function Hero({ heading, subheading, globeConfig }: HeroProps) {
   // Provide stable config reference
   const config = useMemo(() => globeConfig, [globeConfig]);
   return (
-    <section className="relative w-full min-h-[90vh] flex flex-col lg:flex-row items-center justify-center overflow-hidden bg-black text-white">
+  <section className="relative w-full h-screen flex flex-col lg:flex-row items-center justify-center overflow-hidden bg-black text-white">
       {/* Star / space background layers */}
-      <div className="pointer-events-none absolute inset-0 z-0">
+  <div className="pointer-events-none absolute inset-0 z-0">
         <Starfield />
         <canvas id="starfield-canvas" className="absolute inset-0 w-full h-full" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(40,70,160,0.15),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(150,50,200,0.08),transparent_65%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(40,70,160,0.15),transparent_60%)] mix-blend-screen" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(150,50,200,0.08),transparent_65%)] mix-blend-screen" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0),rgba(0,0,0,0.55)_70%)]" />
       </div>
 
       {/* Left text content */}

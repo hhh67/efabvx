@@ -24,7 +24,6 @@ declare module "@react-three/fiber" {
 
 extend({ ThreeGlobe: ThreeGlobe });
 
-const aspect = 1.2;
 const cameraZ = 300;
 
 export type GlobeConfig = {
@@ -352,7 +351,10 @@ export function World(props: WorldProps) {
     );
   };
   return (
-    <Canvas scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
+    <Canvas
+      scene={scene}
+      camera={{ fov: 50, near: 0.1, far: 2000, position: [0, 0, cameraZ] }}
+    >
       <WebGLRendererConfig />
       <ambientLight color={globeConfig.ambientLight} intensity={0.85} />
       {/* Dynamic sun (directional) light based on time & timezone */}
@@ -384,6 +386,7 @@ export function World(props: WorldProps) {
         maxDistance={cameraZ}
         autoRotateSpeed={1}
         autoRotate={true}
+        target={[0, 0, 0]}
         minPolarAngle={Math.PI / 3.5}
         maxPolarAngle={Math.PI - Math.PI / 3}
       />
