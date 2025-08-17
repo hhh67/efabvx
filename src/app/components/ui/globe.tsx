@@ -23,7 +23,8 @@ declare module "@react-three/fiber" {
 
 extend({ ThreeGlobe: ThreeGlobe });
 
-const cameraZ = 300;
+// カメラ距離: 値を小さくして画面上の地球サイズを拡大
+const cameraZ = 250;
 
 export type GlobeConfig = {
   pointSize?: number;
@@ -213,7 +214,7 @@ export function Globe({ globeConfig }: WorldProps) {
     globeRef.current
       .hexPolygonsData(countries.features)
       .hexPolygonResolution(3)
-      .hexPolygonMargin(0.2)
+      .hexPolygonMargin(0.4)
       .showAtmosphere(defaultProps.showAtmosphere)
       .atmosphereColor(defaultProps.atmosphereColor)
       .atmosphereAltitude(defaultProps.atmosphereAltitude)
@@ -314,7 +315,7 @@ export function World(props: WorldProps) {
   const Terminator = () => {
     const uniforms = {
       sunDir: { value: new Vector3(0, 1, 0) },
-      nightStrength: { value: 0.2 }, // slightly less dark nights
+      nightStrength: { value: 0 }, // slightly less dark nights
       softness: { value: 0.33 },
     };
     return (
@@ -352,7 +353,7 @@ export function World(props: WorldProps) {
   return (
     <Canvas
       scene={scene}
-      camera={{ fov: 50, near: 0.1, far: 2000, position: [0, 0, cameraZ] }}
+      camera={{ fov: 60, near: 0.1, far: 2000, position: [0, 0, cameraZ] }}
     >
       <WebGLRendererConfig />
       <ambientLight color={globeConfig.ambientLight} intensity={0.85} />

@@ -19,7 +19,7 @@ export function Hero({ heading, subheading, globeConfig }: HeroProps) {
   // Provide stable config reference
   const config = useMemo(() => globeConfig, [globeConfig]);
   return (
-    <section className="relative w-full h-screen flex flex-col lg:flex-row items-center justify-center overflow-hidden bg-black text-white">
+    <section className="relative w-full h-screen flex flex-col lg:flex-row items-center justify-center overflow-hidden text-white">
       {/* Star / space background layers */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <Starfield />
@@ -74,7 +74,7 @@ export function Hero({ heading, subheading, globeConfig }: HeroProps) {
       </div>
 
       {/* Right Globe */}
-      <div className="relative flex-1 min-h-[480px] h-[70vh] w-full lg:w-1/2 z-10">
+      <div className="relative flex-1 min-h-[520px] h-full w-full lg:w-[55%] xl:w-[50%] z-10">
         <div className="absolute inset-0">
           <World globeConfig={config} />
         </div>

@@ -31,9 +31,9 @@ export function GlobeDemo() {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-screen w-screen overflow-hidden bg-black">
+    <div className="relative flex items-center justify-center h-screen w-screen overflow-hidden">
       <div className="absolute inset-0">
-  <World globeConfig={globeConfig} />
+        <World globeConfig={globeConfig} />
       </div>
     </div>
   );

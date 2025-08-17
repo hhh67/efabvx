@@ -24,3 +24,109 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* 全ページ背景グラデーション (Nebula 代替) */
+.animated-bg {
+  background: #05050a;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+.animated-bg::before,
+.animated-bg::after {
+  content: "";
+  position: fixed;
+  inset: -10%;
+  pointer-events: none;
+  background: radial-gradient(
+      circle at 30% 40%,
+      rgba(9, 0, 14, 0.304),
+      transparent 60%
+    ),
+    radial-gradient(circle at 72% 65%, rgba(0, 18, 121, 0.452), transparent 65%),
+    linear-gradient(
+      125deg,
+      #060612 0%,
+      #09091d 35%,
+      #0b0c28 55%,
+      #110d2c 75%,
+      #060611 100%
+    );
+  background-blend-mode: screen, screen, multiply;
+  animation: bgShift 28s linear infinite;
+  filter: hue-rotate(0deg) brightness(1.05) saturate(1.15);
+  z-index: -1;
+}
+.animated-bg::after {
+  mix-blend-mode: screen;
+  opacity: 0.65;
+  animation: bgShiftAlt 42s linear infinite;
+  filter: hue-rotate(25deg) brightness(1.08) saturate(1.2) blur(2px);
+}
+@keyframes bgShift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: hue-rotate(0deg) brightness(1.05) saturate(1.15);
+  }
+  50% {
+    transform: translate3d(1.5%, -1.5%, 0) scale(1.04);
+    filter: hue-rotate(30deg) brightness(1.08) saturate(1.22);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: hue-rotate(0deg) brightness(1.05) saturate(1.15);
+  }
+}
+@keyframes bgShiftAlt {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.05) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-2%, 2%, 0) scale(1.1) rotate(20deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.05) rotate(0deg);
+  }
+}
+
+/* Animated deep purple / blue gradient background */
+.gradient-anim-bg {
+  --g1: 30% 40%;
+  --g2: 70% 60%;
+  --twist: 0deg;
+  background: radial-gradient(
+      circle at var(--g1),
+      rgba(70, 40, 140, 0.55),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at var(--g2),
+      rgba(15, 80, 170, 0.45),
+      transparent 60%
+    ),
+    linear-gradient(
+      135deg,
+      #05040a 0%,
+      #0b0b1a 35%,
+      #090a26 55%,
+      #120a2a 75%,
+      #080814 100%
+    );
+  background-blend-mode: screen, screen, multiply;
+  animation: gradientHue 22s linear infinite;
+  will-change: background-position, filter;
+  filter: hue-rotate(var(--twist)) brightness(1.05) saturate(1.15);
+  transition: filter 0.8s ease;
+}
+
+@keyframes gradientHue {
+  0% {
+    filter: hue-rotate(0deg) brightness(1.05) saturate(1.15);
+  }
+  50% {
+    filter: hue-rotate(30deg) brightness(1.08) saturate(1.2);
+  }
+  100% {
+    filter: hue-rotate(0deg) brightness(1.05) saturate(1.15);
+  }
+}

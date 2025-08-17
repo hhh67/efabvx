@@ -3,14 +3,14 @@ import { Hero } from "./components/sections/Hero";
 export default function Home() {
   const globeConfig = {
     pointSize: 0,
-    globeColor: "#16348D",
+    globeColor: "#160747",
     showAtmosphere: true,
     atmosphereColor: "#FFFFFF",
     atmosphereAltitude: 0.1,
-    emissive: "#16348D",
+    emissive: "#160747",
     emissiveIntensity: 0.1,
     shininess: 0.9,
-    polygonColor: "#A98518",
+    polygonColor: "#ab8c2eff",
     ambientLight: "#38bdf8",
     directionalLeftLight: "#ffffff",
     directionalTopLight: "#ffffff",
