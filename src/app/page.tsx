@@ -23,8 +23,16 @@ export default function Home() {
     <>
       <Hero
         globeConfig={globeConfig}
-        heading={<><span className="text-blue-400">Hello, I'm</span><br/>Your Name</>}
-        subheading={"Full-stack Developer / Engineer crafting immersive web experiences."}
+        heading={
+          <>
+            <span className="text-blue-400">Hello, I'm</span>
+            <br />
+            Your Name
+          </>
+        }
+        subheading={
+          "Full-stack Developer / Engineer crafting immersive web experiences."
+        }
       />
     </>
   );

@@ -24,22 +24,16 @@ export function GlobeDemo() {
     directionalTopLight: "#ffffff",
     pointLight: "#ffffff",
     timeZoneOffsetHours: 9, // JST
-    arcTime: 0,
-    arcLength: 0,
-    rings: 0,
-    maxRings: 0,
     // Start viewpoint roughly over Japan
     initialPosition: { lat: 36.2048, lng: 138.2529 },
     autoRotate: true,
     autoRotateSpeed: 0.5,
   };
-  // pass empty data to suppress arcs/points/rings
-  const sampleArcs: any[] = [];
 
   return (
     <div className="relative flex items-center justify-center h-screen w-screen overflow-hidden bg-black">
       <div className="absolute inset-0">
-        <World data={sampleArcs} globeConfig={globeConfig} />
+  <World globeConfig={globeConfig} />
       </div>
     </div>
   );

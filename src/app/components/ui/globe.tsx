@@ -8,7 +8,6 @@ import {
   DirectionalLight,
   Fog,
   MeshPhongMaterial,
-  PerspectiveCamera,
   Scene,
   ShaderMaterial,
   Vector3,
@@ -97,18 +96,18 @@ export function Globe({ globeConfig }: WorldProps) {
     if (!(material as any)._lapisShader) {
       (material as any)._lapisShader = true;
       material.onBeforeCompile = (shader) => {
-  shader.uniforms.uFresnelStrength = { value: 0.28 }; // base fresnel
-  shader.uniforms.uFresnelTint = { value: new Color("#0d49c4") };
-  shader.uniforms.uDepthTint = { value: new Color("#03163a") };
-  shader.uniforms.uGoldColor = { value: new Color("#c9a64d") };
-  shader.uniforms.uGoldBaseDensity = { value: 0.03 }; // base probability
-  shader.uniforms.uGoldVariationAmp = { value: 0.02 }; // additive variation
-  shader.uniforms.uGoldStrength = { value: 0.9 };
-  shader.uniforms.uTime = { value: 0 };
-  shader.uniforms.uPhase = { value: 0 };
-  shader.uniforms.uPhaseSpeed = { value: 0.15 };
-  shader.uniforms.uSunDir = { value: new Color(1, 1, 1) }; // treated as direction
-  shader.uniforms.uDayInfluence = { value: 1.0 };
+        shader.uniforms.uFresnelStrength = { value: 0.28 }; // base fresnel
+        shader.uniforms.uFresnelTint = { value: new Color("#0d49c4") };
+        shader.uniforms.uDepthTint = { value: new Color("#03163a") };
+        shader.uniforms.uGoldColor = { value: new Color("#c9a64d") };
+        shader.uniforms.uGoldBaseDensity = { value: 0.03 }; // base probability
+        shader.uniforms.uGoldVariationAmp = { value: 0.02 }; // additive variation
+        shader.uniforms.uGoldStrength = { value: 0.9 };
+        shader.uniforms.uTime = { value: 0 };
+        shader.uniforms.uPhase = { value: 0 };
+        shader.uniforms.uPhaseSpeed = { value: 0.15 };
+        shader.uniforms.uSunDir = { value: new Color(1, 1, 1) }; // treated as direction
+        shader.uniforms.uDayInfluence = { value: 1.0 };
 
         // capture view position for fresnel
         shader.vertexShader = shader.vertexShader.replace(
@@ -377,7 +376,7 @@ export function World(props: WorldProps) {
         position={new Vector3(-200, 500, 200)}
         intensity={0.8}
       />
-  <Globe globeConfig={globeConfig} />
+      <Globe globeConfig={globeConfig} />
       <Terminator />
       <OrbitControls
         enablePan={false}
