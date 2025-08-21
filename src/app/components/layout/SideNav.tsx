@@ -28,7 +28,7 @@ export function SideNav() {
           }
         });
       },
-      { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] }
+      { rootMargin: "-1000% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] }
     );
     const targets = NAV_ITEMS.filter((i) => i.id !== "top")
       .map((i) => document.getElementById(i.id))
@@ -38,11 +38,12 @@ export function SideNav() {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = sectionId === "top" ? document.body : document.getElementById(sectionId);
+    const element =
+      sectionId === "top" ? document.body : document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ 
+      element.scrollIntoView({
         behavior: "smooth",
-        block: sectionId === "top" ? "start" : "center"
+        block: sectionId === "top" ? "start" : "center",
       });
     }
   };
@@ -76,7 +77,7 @@ export function SideNav() {
               }}
               transition={{ duration: 0.3 }}
             />
-            
+
             {/* Main indicator dot */}
             <motion.span
               className={`relative w-2 h-2 rounded-full block transition-all duration-300 ${
@@ -91,32 +92,39 @@ export function SideNav() {
             />
 
             {/* Label */}
-            <div className="absolute left-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 
+            <div
+              className="absolute left-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 
                            pointer-events-none whitespace-nowrap transition-all duration-300 
                            group-hover:translate-x-0 -translate-x-4 group-hover:scale-100 scale-90"
             >
               <div className="relative">
                 {/* Main label background */}
-                <div className="bg-gradient-to-r from-slate-900/95 to-slate-800/95 backdrop-blur-xl 
+                <div
+                  className="bg-gradient-to-r from-slate-900/95 to-slate-800/95 backdrop-blur-xl 
                               px-4 py-3 rounded-xl shadow-2xl border border-slate-600/40
-                              relative overflow-hidden">
+                              relative overflow-hidden"
+                >
                   {/* Animated gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 
-                                animate-pulse" />
-                  
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 
+                                animate-pulse"
+                  />
+
                   {/* Label text */}
                   <span className="relative text-slate-100 font-semibold text-sm tracking-wide">
                     {item.label}
                   </span>
-                  
+
                   {/* Accent line */}
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400" />
                 </div>
-                
+
                 {/* Arrow */}
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 
+                <div
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 
                               w-3 h-3 bg-gradient-to-br from-slate-900/95 to-slate-800/95 
-                              rotate-45 border-l border-b border-slate-600/40" />
+                              rotate-45 border-l border-b border-slate-600/40"
+                />
               </div>
             </div>
           </motion.button>

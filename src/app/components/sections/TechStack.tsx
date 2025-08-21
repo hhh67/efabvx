@@ -262,21 +262,24 @@ export function TechStackSection() {
   return (
     <section
       id="tech"
-      className="relative scroll-mt-24 py-32 px-6 md:px-16 max-w-6xl mx-auto"
+      className="relative h-screen flex flex-col snap-start"
     >
-      <div className="max-w-6xl">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold mb-10 font-libre tracking-tight text-slate-100 text-left"
-        >
-          Tech Stack
-        </motion.h2>
+      <div className="flex-shrink-0 pt-24 pb-6 px-6 md:px-16">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl md:text-4xl font-bold font-libre tracking-tight text-slate-100 text-left"
+          >
+            Tech Stack
+          </motion.h2>
+        </div>
       </div>
-      <div className="flex justify-center">
-        <div className="grid gap-8 md:grid-cols-1 max-w-6xl w-full">
+      <div className="flex-1 overflow-y-auto px-6 md:px-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid gap-8 md:grid-cols-1 w-full pb-8">
           {stacks.map((s, i) => (
             <motion.div
               key={s.group}
@@ -304,6 +307,7 @@ export function TechStackSection() {
               </div>
             </motion.div>
           ))}
+          </div>
         </div>
       </div>
     </section>

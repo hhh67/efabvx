@@ -25,9 +25,9 @@ export default function Home() {
     autoRotateSpeed: 0.5,
   };
   return (
-    <>
+    <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
       <SideNav />
-      <div id="top">
+      <section id="top" className="h-screen snap-start">
         <Hero
           globeConfig={globeConfig}
           heading={
@@ -39,11 +39,11 @@ export default function Home() {
           }
           subheading={"Full Stack Developer"}
         />
-      </div>
+      </section>
       <AboutSection />
       <TechStackSection />
       <ProjectsSection />
       <ContactSection />
-    </>
+    </div>
   );
 }

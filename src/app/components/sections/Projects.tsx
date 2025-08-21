@@ -39,20 +39,22 @@ export function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="relative scroll-mt-24 py-32 px-6 md:px-16 max-w-6xl mx-auto"
+      className="relative h-screen flex flex-col snap-start"
     >
-      <div className="max-w-6xl">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold mb-10 font-libre tracking-tight text-slate-100 text-left"
-        >
-          Projects
-        </motion.h2>
+      <div className="flex-shrink-0 pt-24 pb-6 px-6 md:px-16">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl md:text-4xl font-bold font-libre tracking-tight text-slate-100 text-left"
+          >
+            Projects
+          </motion.h2>
+        </div>
       </div>
-      <div className="flex justify-center items-center min-h-[300px]">
+      <div className="flex-1 overflow-y-auto px-6 md:px-16 flex items-center justify-center">
         <div className="px-6 py-4 rounded-xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm">
           <div className="flex items-center space-x-3">
             <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
