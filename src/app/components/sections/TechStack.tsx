@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { ReactNode, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -279,15 +279,12 @@ export function TechStackSection() {
       </div>
       <div className="flex-1 overflow-y-auto px-6 md:px-16">
         <div className="max-w-6xl mx-auto">
-          <div className="grid gap-8 md:grid-cols-1 w-full pb-8">
+          <div className="space-y-4">
           {stacks.map((s, i) => (
-            <motion.div
+            <div
               key={s.group}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ delay: i * 0.05, duration: 0.55 }}
-              className="group relative rounded-xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm p-6 overflow-hidden"
+              className="group relative rounded-xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm p-6 overflow-hidden sticky top-24"
+              style={{ zIndex: stacks.length - i }}
             >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-[radial-gradient(circle_at_30%_30%,rgba(120,150,255,0.25),transparent_60%)]" />
               <div className="relative">
@@ -305,7 +302,7 @@ export function TechStackSection() {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
           </div>
         </div>
