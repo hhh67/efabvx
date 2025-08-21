@@ -20,7 +20,7 @@ export function Starfield() {
       size: number;
       s: number;
     }[] = [];
-    const STAR_COUNT = 1500;
+    const STAR_COUNT = 3500;
     for (let i = 0; i < STAR_COUNT; i++) {
       stars.push({
         x: Math.random() * width - width / 2,
