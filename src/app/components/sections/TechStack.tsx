@@ -108,7 +108,7 @@ const IconTooltip: React.FC<{ label: string; children: ReactNode }> = ({
           updatePos();
         }}
         onBlur={() => setOpen(false)}
-        className="inline-flex items-center justify-center text-blue-300/90 hover:text-blue-300 focus-visible:outline-none transition-all duration-300 h-14 w-14 text-4xl cursor-default hover:scale-110 hover:rotate-3 group-hover/item:scale-105"
+        className="inline-flex items-center justify-center text-blue-300/90 hover:text-blue-300 focus-visible:outline-none transition-all duration-300 h-14 w-14 text-4xl cursor-default hover:scale-135 hover:rotate-15 group-hover/item:scale-105"
       >
         {children}
       </span>
