@@ -113,7 +113,6 @@ const IconTooltip: React.FC<{ label: string; children: ReactNode }> = ({
         {children}
       </span>
       {open &&
-        typeof window !== "undefined" &&
         createPortal(
           <div
             id={id}
