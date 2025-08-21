@@ -289,13 +289,16 @@ export function TechStackSection() {
               <h3 className="font-semibold text-lg mb-3 text-blue-300 text-left">
                 {s.group}
               </h3>
-              <ul className="flex flex-wrap gap-4 text-slate-300">
+              <div className="grid grid-cols-[repeat(auto-fill,minmax(56px,1fr))] gap-4 text-slate-300 justify-items-center items-center">
                 {s.skills.map((skill) => (
-                  <li key={skill.name} className="group/item">
+                  <div
+                    key={skill.name}
+                    className="group/item flex items-center justify-center"
+                  >
                     <IconTooltip label={skill.name}>{skill.icon}</IconTooltip>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </motion.div>
           ))}
         </div>
