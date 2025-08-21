@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+/* Smooth, weighted scrolling effect */
+* {
+  scroll-behavior: unset;
+}
+
+html {
+  scroll-behavior: unset;
+}
+
+/* Custom smooth scroll with momentum */
+.smooth-scroll {
+  scroll-behavior: unset;
+  scroll-timeline-axis: block;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 0;
+  overscroll-behavior: none;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

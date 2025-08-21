@@ -1,3 +1,4 @@
+"use client";
 import { SideNav } from "./components/layout/SideNav";
 import { AboutSection } from "./components/sections/About";
 import { ContactSection } from "./components/sections/Contact";
@@ -25,7 +26,7 @@ export default function Home() {
     autoRotateSpeed: 0.5,
   };
   return (
-    <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
+    <div className="h-screen overflow-y-scroll snap-y snap-mandatory smooth-scroll">
       <SideNav />
       <section id="top" className="h-screen snap-start">
         <Hero

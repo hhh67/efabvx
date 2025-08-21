@@ -21,29 +21,37 @@ export function SideNav() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        let activeEntry = null;
+        let maxRatio = 0;
+        
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute("id");
-            if (id) setActive(id);
+          if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+            maxRatio = entry.intersectionRatio;
+            activeEntry = entry;
           }
         });
+        
+        if (activeEntry) {
+          const id = activeEntry.target.getAttribute("id");
+          if (id) setActive(id);
+        }
       },
-      { rootMargin: "-1000% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] }
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.1, 0.5, 0.9, 1] }
     );
-    const targets = NAV_ITEMS.filter((i) => i.id !== "top")
-      .map((i) => document.getElementById(i.id))
+    
+    const targets = NAV_ITEMS.map((i) => document.getElementById(i.id))
       .filter(Boolean) as HTMLElement[];
     targets.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element =
-      sectionId === "top" ? document.body : document.getElementById(sectionId);
+    setActive(sectionId);
+    const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({
         behavior: "smooth",
-        block: sectionId === "top" ? "start" : "center",
+        block: "start",
       });
     }
   };
