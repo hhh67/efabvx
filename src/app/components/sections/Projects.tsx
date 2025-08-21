@@ -52,51 +52,59 @@ export function ProjectsSection() {
           Projects
         </motion.h2>
       </div>
-      <div className="flex justify-center">
-        <div className="grid gap-8 md:grid-cols-2 max-w-6xl w-full">
-        {projects.map((p, i) => (
-          <motion.div
-            key={p.title}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ delay: i * 0.05, duration: 0.55 }}
-            className="group relative rounded-xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm p-6 overflow-hidden"
-          >
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-[radial-gradient(circle_at_30%_30%,rgba(120,150,255,0.25),transparent_60%)]" />
-            <div className="relative">
-              <h3 className="font-semibold text-xl mb-3 text-blue-300 text-left">
-                {p.link ? (
-                  <a
-                    href={p.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:underline"
-                  >
-                    {p.title}
-                  </a>
-                ) : (
-                  p.title
-                )}
-              </h3>
-              <p className="text-sm text-slate-300 leading-relaxed mb-4 text-left">
-                {p.description}
-              </p>
-              <ul className="flex flex-wrap gap-2">
-                {p.tags.map((t) => (
-                  <li
-                    key={t}
-                    className="text-[11px] tracking-wide px-2 py-1 rounded bg-white/10 text-slate-200"
-                  >
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-        ))}
+      <div className="flex justify-center items-center min-h-[300px]">
+        <div className="px-6 py-4 rounded-xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm">
+          <div className="flex items-center space-x-3">
+            <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+            <span className="text-slate-300">準備中です...</span>
+          </div>
         </div>
       </div>
+      {/* <div className="flex justify-center">
+        <div className="grid gap-8 md:grid-cols-2 max-w-6xl w-full">
+          {projects.map((p, i) => (
+            <motion.div
+              key={p.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ delay: i * 0.05, duration: 0.55 }}
+              className="group relative rounded-xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm p-6 overflow-hidden"
+            >
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-[radial-gradient(circle_at_30%_30%,rgba(120,150,255,0.25),transparent_60%)]" />
+              <div className="relative">
+                <h3 className="font-semibold text-xl mb-3 text-blue-300 text-left">
+                  {p.link ? (
+                    <a
+                      href={p.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      {p.title}
+                    </a>
+                  ) : (
+                    p.title
+                  )}
+                </h3>
+                <p className="text-sm text-slate-300 leading-relaxed mb-4 text-left">
+                  {p.description}
+                </p>
+                <ul className="flex flex-wrap gap-2">
+                  {p.tags.map((t) => (
+                    <li
+                      key={t}
+                      className="text-[11px] tracking-wide px-2 py-1 rounded bg-white/10 text-slate-200"
+                    >
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div> */}
     </section>
   );
 }

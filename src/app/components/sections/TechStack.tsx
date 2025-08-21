@@ -108,7 +108,7 @@ const IconTooltip: React.FC<{ label: string; children: ReactNode }> = ({
           updatePos();
         }}
         onBlur={() => setOpen(false)}
-        className="inline-flex items-center justify-center text-blue-300/90 hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 rounded transition-colors h-14 w-14 text-4xl cursor-default"
+        className="inline-flex items-center justify-center text-blue-300/90 hover:text-blue-300 focus-visible:outline-none transition-all duration-300 h-14 w-14 text-4xl cursor-default hover:scale-110 hover:rotate-3 group-hover/item:scale-105"
       >
         {children}
       </span>
@@ -286,18 +286,21 @@ export function TechStackSection() {
               transition={{ delay: i * 0.05, duration: 0.55 }}
               className="group relative rounded-xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm p-6 overflow-hidden"
             >
-              <h3 className="font-semibold text-lg mb-3 text-blue-300 text-left">
-                {s.group}
-              </h3>
-              <div className="grid grid-cols-[repeat(auto-fill,minmax(56px,1fr))] gap-4 text-slate-300 justify-items-center items-center">
-                {s.skills.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="group/item flex items-center justify-center"
-                  >
-                    <IconTooltip label={skill.name}>{skill.icon}</IconTooltip>
-                  </div>
-                ))}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-[radial-gradient(circle_at_30%_30%,rgba(120,150,255,0.25),transparent_60%)]" />
+              <div className="relative">
+                <h3 className="font-semibold text-lg mb-3 text-blue-300 text-left">
+                  {s.group}
+                </h3>
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(56px,1fr))] gap-4 text-slate-300 justify-items-center items-center">
+                  {s.skills.map((skill) => (
+                    <div
+                      key={skill.name}
+                      className="group/item flex items-center justify-center"
+                    >
+                      <IconTooltip label={skill.name}>{skill.icon}</IconTooltip>
+                    </div>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
