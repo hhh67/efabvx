@@ -50,6 +50,14 @@ body {
   font-family: var(--font-libre-baskerville), var(--font-geist-sans), serif;
 }
 
+.font-dm-serif {
+  font-family: var(--font-dm-serif-text), var(--font-libre-baskerville), serif;
+}
+
+.font-lobster {
+  font-family: var(--font-lobster), var(--font-geist-sans), cursive;
+}
+
 /* 全ページ背景グラデーション (Nebula 代替) */
 .animated-bg {
   background: #05050a;

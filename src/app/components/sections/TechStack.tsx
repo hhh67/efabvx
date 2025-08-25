@@ -1,5 +1,5 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { ReactNode, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -260,10 +260,7 @@ const stacks: StackGroup[] = [
 
 export function TechStackSection() {
   return (
-    <section
-      id="tech"
-      className="relative h-screen flex flex-col snap-start"
-    >
+    <section id="tech" className="relative h-screen flex flex-col snap-start">
       <div className="flex-shrink-0 pt-24 pb-6 px-6 md:px-16">
         <div className="max-w-6xl mx-auto">
           <motion.h2
@@ -280,30 +277,44 @@ export function TechStackSection() {
       <div className="flex-1 overflow-y-auto px-6 md:px-16">
         <div className="max-w-6xl mx-auto">
           <div className="space-y-4">
-          {stacks.map((s, i) => (
-            <div
-              key={s.group}
-              className="group relative rounded-xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm p-6 overflow-hidden sticky top-24"
-              style={{ zIndex: stacks.length - i }}
-            >
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-[radial-gradient(circle_at_30%_30%,rgba(120,150,255,0.25),transparent_60%)]" />
-              <div className="relative">
-                <h3 className="font-semibold text-lg mb-3 text-blue-300 text-left">
-                  {s.group}
-                </h3>
-                <div className="grid grid-cols-[repeat(auto-fill,minmax(56px,1fr))] gap-4 text-slate-300 justify-items-center items-center">
-                  {s.skills.map((skill) => (
-                    <div
-                      key={skill.name}
-                      className="group/item flex items-center justify-center"
-                    >
-                      <IconTooltip label={skill.name}>{skill.icon}</IconTooltip>
-                    </div>
-                  ))}
+            {stacks.map((s, i) => (
+              <div
+                key={s.group}
+                className="group relative rounded-2xl border-2 border-slate-700/80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 overflow-hidden sticky top-24 min-h-[400px] shadow-2xl shadow-blue-900/20"
+                style={{ zIndex: i + 1 }}
+              >
+                {/* グラデーション装飾 */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 pointer-events-none" />
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 rounded-t-2xl" />
+                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent" />
+                
+                {/* ホバー時の光る境界線 */}
+                <div className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-br from-blue-400/20 via-cyan-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                
+                <div className="relative h-full flex flex-col">
+                  <h3 className="font-semibold text-xl mb-6 text-blue-300 text-left font-libre">
+                    {s.group}
+                  </h3>
+                  <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {s.skills.map((skill) => (
+                      <div
+                        key={skill.name}
+                        className="group/item flex items-center gap-3 p-3 rounded-xl bg-slate-800/80 border border-slate-600/50 hover:bg-slate-700/90 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1"
+                      >
+                        <div className="flex-shrink-0">
+                          <span className="inline-flex items-center justify-center text-blue-300 group-hover/item:text-cyan-300 group-hover/item:scale-110 transition-all duration-300 h-10 w-10 text-2xl">
+                            {skill.icon}
+                          </span>
+                        </div>
+                        <span className="text-slate-100 font-bold text-sm truncate font-dm-serif group-hover/item:text-white transition-colors duration-300">
+                          {skill.name}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
           </div>
         </div>
       </div>

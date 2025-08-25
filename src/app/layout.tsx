@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Libre_Baskerville } from "next/font/google";
+import { Geist, Geist_Mono, Libre_Baskerville, DM_Serif_Text, Lobster } from "next/font/google";
 import { Starfield } from "./components/visuals/Starfield";
 import "./globals.css";
 
@@ -21,6 +21,21 @@ const libreBaskerville = Libre_Baskerville({
   display: "swap",
 });
 
+const dmSerifText = DM_Serif_Text({
+  variable: "--font-dm-serif-text",
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const lobster = Lobster({
+  variable: "--font-lobster",
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "@efabvx",
   description: "Hideya Hoshino's portfolio",
@@ -34,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${libreBaskerville.variable} antialiased relative text-white animated-bg overflow-y-auto min-h-screen scroll-smooth`}
+        className={`${geistSans.variable} ${geistMono.variable} ${libreBaskerville.variable} ${dmSerifText.variable} ${lobster.variable} antialiased relative text-white animated-bg overflow-y-auto min-h-screen scroll-smooth`}
       >
         {/* Starfield background for entire LP */}
         <div className="pointer-events-none fixed inset-0 z-0">
