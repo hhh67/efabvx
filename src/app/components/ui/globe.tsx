@@ -24,7 +24,20 @@ declare module "@react-three/fiber" {
 extend({ ThreeGlobe: ThreeGlobe });
 
 // カメラ距離: 値を小さくして画面上の地球サイズを拡大（1.5倍サイズ）
-const cameraZ = 180;
+const cameraZ = 200;
+
+// 東京を正面に向けるためのカメラ初期位置を計算
+function getTokyoCameraPosition(): [number, number, number] {
+  const tokyoLng = (110 * Math.PI) / 180; // 少し西にずらす
+  const tokyoLat = (35.8 * Math.PI) / 180; // ラジアン
+
+  // 東京の反対側にカメラを配置（東京を見るため）
+  const x = cameraZ * Math.cos(tokyoLat) * Math.cos(tokyoLng + Math.PI);
+  const y = cameraZ * Math.sin(tokyoLat);
+  const z = cameraZ * Math.cos(tokyoLat) * Math.sin(tokyoLng + Math.PI);
+
+  return [x, y, z];
+}
 
 export type GlobeConfig = {
   pointSize?: number;
@@ -86,7 +99,7 @@ export function Globe({ globeConfig }: WorldProps) {
     if (!globeRef.current || !isInitialized) return;
 
     console.log("Applying marble shader to globe material"); // Debug log
-    
+
     const material = globeRef.current.globeMaterial() as MeshPhongMaterial;
     const oceanBase = globeConfig.globeColor || "#1e3a5f"; // ocean blue base
     material.color = new Color(oceanBase);
@@ -96,30 +109,30 @@ export function Globe({ globeConfig }: WorldProps) {
     material.specular = new Color("#7fb3d3"); // bright water specular
 
     // Correct onBeforeCompile implementation
-    material.onBeforeCompile = function(shader) {
-        console.log("onBeforeCompile called"); // Debug log
-        
-        // Add custom uniforms
-        shader.uniforms.uMarbleColor1 = { value: new Color("#ffffff") }; // pure white
-        shader.uniforms.uMarbleColor2 = { value: new Color("#888888") }; // medium gray
-        shader.uniforms.uMarbleColor3 = { value: new Color("#333333") }; // dark gray
-        shader.uniforms.uMarbleScale = { value: 0.8 }; // marble pattern scale
-        shader.uniforms.uTime = { value: 0 };
+    material.onBeforeCompile = function (shader) {
+      console.log("onBeforeCompile called"); // Debug log
 
-        // Modify vertex shader
-        shader.vertexShader = shader.vertexShader.replace(
-          'void main() {',
-          `
+      // Add custom uniforms
+      shader.uniforms.uMarbleColor1 = { value: new Color("#ffffff") }; // pure white
+      shader.uniforms.uMarbleColor2 = { value: new Color("#888888") }; // medium gray
+      shader.uniforms.uMarbleColor3 = { value: new Color("#333333") }; // dark gray
+      shader.uniforms.uMarbleScale = { value: 0.8 }; // marble pattern scale
+      shader.uniforms.uTime = { value: 0 };
+
+      // Modify vertex shader
+      shader.vertexShader = shader.vertexShader.replace(
+        "void main() {",
+        `
           varying vec3 vWorldPosition;
           void main() {
             vWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;
           `
-        );
+      );
 
-        // Modify fragment shader
-        shader.fragmentShader = shader.fragmentShader.replace(
-          'void main() {',
-          `
+      // Modify fragment shader
+      shader.fragmentShader = shader.fragmentShader.replace(
+        "void main() {",
+        `
           varying vec3 vWorldPosition;
           uniform vec3 uMarbleColor1;
           uniform vec3 uMarbleColor2;
@@ -128,11 +141,11 @@ export function Globe({ globeConfig }: WorldProps) {
           uniform float uTime;
           void main() {
           `
-        );
+      );
 
-        shader.fragmentShader = shader.fragmentShader.replace(
-          '#include <output_fragment>',
-          `
+      shader.fragmentShader = shader.fragmentShader.replace(
+        "#include <output_fragment>",
+        `
           // Marble pattern
           vec3 pos = vWorldPosition * uMarbleScale;
           float t = uTime * 0.1;
@@ -158,12 +171,12 @@ export function Globe({ globeConfig }: WorldProps) {
           
           #include <output_fragment>
           `
-        );
+      );
 
-        // Store reference for animation
-        (material as any).userData.shader = shader;
+      // Store reference for animation
+      (material as any).userData.shader = shader;
     };
-    
+
     material.needsUpdate = true;
   }, [
     isInitialized,
@@ -183,21 +196,77 @@ export function Globe({ globeConfig }: WorldProps) {
     }
   });
 
+  // 東京周辺の座標範囲（範囲を広げて確実にヒット）
+  const tokyoBounds = {
+    minLng: 139.0,
+    maxLng: 140.5,
+    minLat: 35.0,
+    maxLat: 36.5,
+  };
+
   // Configure filled land polygons only (no arcs/points/rings)
   useEffect(() => {
     if (!globeRef.current || !isInitialized) return;
+
+    // 日本のMultiPolygonを個別ポリゴンに分解
+    const expandedFeatures: any[] = [];
+
+    countries.features.forEach((feature: any) => {
+      if (
+        feature.properties?.name === "Japan" &&
+        feature.geometry?.type === "MultiPolygon"
+      ) {
+        // MultiPolygonの各ポリゴンを個別featureとして作成
+        feature.geometry.coordinates.forEach((polygon: any, index: number) => {
+          const newFeature = {
+            ...feature,
+            geometry: {
+              type: "Polygon",
+              coordinates: polygon,
+            },
+            properties: {
+              ...feature.properties,
+              polygonIndex: index,
+            },
+          };
+          expandedFeatures.push(newFeature);
+        });
+      } else {
+        expandedFeatures.push(feature);
+      }
+    });
+
+    // 東京にポイントを追加（千葉寄りに調整）
+    const tokyoPoint = {
+      lat: 35.8,
+      lng: 140.1,
+      size: 0.5,
+      color: "#ff0000",
+    };
+
     // Only filled polygons, no arcs/rings/points
     globeRef.current
-      .hexPolygonsData(countries.features)
+      .hexPolygonsData(expandedFeatures)
       .hexPolygonResolution(3)
-      .hexPolygonMargin(0.4)
+      .hexPolygonMargin(0.2)
       .showAtmosphere(defaultProps.showAtmosphere)
       .atmosphereColor(defaultProps.atmosphereColor)
       .atmosphereAltitude(defaultProps.atmosphereAltitude)
       .hexPolygonColor(() => defaultProps.polygonColor)
       .arcsData([])
       .ringsData([])
-      .pointsData([]);
+      .pointsData([tokyoPoint])
+      .pointColor("color")
+      .pointAltitude(0.01)
+      .pointRadius("size");
+
+    // データ設定後に東京ビューを適用
+    const tokyoView = { lat: 35.8, lng: 140.1, altitude: 2.2 };
+    setTimeout(() => {
+      try {
+        (globeRef.current as any).pointOfView(tokyoView, 2000);
+      } catch {}
+    }, 200);
   }, [
     isInitialized,
     defaultProps.showAtmosphere,
@@ -205,16 +274,6 @@ export function Globe({ globeConfig }: WorldProps) {
     defaultProps.atmosphereAltitude,
     defaultProps.polygonColor,
   ]);
-
-  // Set initial view over Japan (override) once
-  useEffect(() => {
-    if (globeRef.current && isInitialized) {
-      const jpn = { lat: 36.2048, lng: 138.2529, altitude: 2.2 };
-      try {
-        (globeRef.current as any).pointOfView(jpn, 0);
-      } catch {}
-    }
-  }, [isInitialized]);
 
   // Rings / arcs animation removed for plain filled globe
 
@@ -239,6 +298,7 @@ export function World(props: WorldProps) {
   scene.fog = new Fog(0xffffff, 400, 2000);
   const sunLightRef = useRef<DirectionalLight | null>(null);
   const terminatorMatRef = useRef<ShaderMaterial | null>(null);
+  const orbitControlsRef = useRef<any>(null);
 
   // Compute approximate sun (directional light) position given UTC time and a timezone offset shift
   function computeSunVector(date: Date, tzOffsetHours: number) {
@@ -329,7 +389,12 @@ export function World(props: WorldProps) {
   return (
     <Canvas
       scene={scene}
-      camera={{ fov: 80, near: 0.1, far: 2000, position: [0, 0, cameraZ] }}
+      camera={{
+        fov: 80,
+        near: 0.1,
+        far: 2000,
+        position: getTokyoCameraPosition(),
+      }}
     >
       <WebGLRendererConfig />
       <ambientLight color={globeConfig.ambientLight} intensity={1.4} />

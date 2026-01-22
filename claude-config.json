@@ -1,0 +1,18 @@
+{
+  "auto_load_files": [
+    ".claude/instructions.md",
+    ".claude/context.md"
+  ],
+  "required_check": "Please read .claude/instructions.md and .claude/context.md before starting any work",
+  "priority_rules": [
+    "Display guarantee is the highest priority",
+    "Incremental implementation only",  
+    "Verify after each step",
+    "Rollback immediately on issues"
+  ],
+  "emergency_patterns": {
+    "card_invisible": "Set opacity: 1, display: block, visibility: visible",
+    "techstack_issues": "Use unified sticky container approach",
+    "jsx_errors": "Check tag matching and structure"
+  }
+}

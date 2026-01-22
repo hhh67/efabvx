@@ -1,36 +1,158 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Site - @efabvx
 
-## Getting Started
+フルスタックエンジニア向けのモダンなポートフォリオサイト
 
-First, run the development server:
+## 🚀 特徴
 
+- **モダンな技術スタック**: Next.js 15 + React 19 + TypeScript
+- **3Dビジュアル**: Three.js による美しい地球儀エフェクト
+- **滑らかなアニメーション**: Framer Motion によるスクロール連動アニメーション
+- **レスポンシブデザイン**: モバイルファーストのアプローチ
+- **パフォーマンス最適化**: 動的インポートとリソース管理
+
+## 🛠️ 技術スタック
+
+### フロントエンド
+- **Next.js 15**: React ベースのフルスタックフレームワーク
+- **React 19**: 最新のReactライブラリ
+- **TypeScript**: 型安全な開発
+- **Tailwind CSS**: ユーティリティファーストのCSS
+
+### アニメーション・3D
+- **Framer Motion**: 高性能アニメーションライブラリ
+- **Three.js**: 3Dグラフィックス
+- **React Three Fiber**: React用Three.jsラッパー
+- **React Three Drei**: Three.js用ヘルパー
+
+### その他
+- **Simple Icons**: 技術アイコンライブラリ
+- **Google Fonts**: Webフォント
+
+## 📦 セットアップ
+
+### 必要な環境
+- Node.js 18 以上
+- npm または yarn
+
+### インストール
 ```bash
+# リポジトリをクローン
+git clone <repository-url>
+cd efabvx
+
+# 依存関係をインストール
+npm install
+
+# 開発サーバーを起動
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 利用可能なコマンド
+```bash
+npm run dev         # 開発サーバー起動
+npm run build       # プロダクションビルド
+npm run start       # プロダクションサーバー起動
+npm run lint        # ESLint実行
+npm run typecheck   # TypeScript型チェック
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 プロジェクト構造
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── components/
+│   │   ├── layout/          # ナビゲーション等
+│   │   ├── sections/        # ページセクション
+│   │   ├── ui/             # 再利用可能なUIコンポーネント
+│   │   └── visuals/        # 視覚効果コンポーネント
+│   ├── globals.css         # グローバルスタイル
+│   ├── layout.tsx          # ルートレイアウト
+│   └── page.tsx           # メインページ
+├── data/
+│   └── globe.json         # 地球儀用GeoJSONデータ
+└── docs/                   # プロジェクトドキュメント
+```
 
-## Learn More
+## 🎨 コンポーネント概要
 
-To learn more about Next.js, take a look at the following resources:
+### Hero Section
+- メインビジュアルとインタラクティブな3D地球儀
+- レスポンシブレイアウト
+- 動的な太陽光シミュレーション
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### About Section  
+- 自己紹介コンテンツ
+- フェードインアニメーション
+- スクロール可能な詳細情報
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### TechStack Section
+- 技術スキルカード表示
+- スクロール連動の重なりエフェクト
+- カテゴリー別整理（5分類）
 
-## Deploy on Vercel
+### Navigation
+- 固定サイドナビゲーション
+- スクロール位置に応じたアクティブ表示
+- モバイル対応ハンバーガーメニュー
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📚 ドキュメント
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+詳細な技術情報は以下のドキュメントを参照してください：
+
+- [`CLAUDE.md`](./CLAUDE.md) - Claude Code開発プロセスガイド
+- [`DEVELOPMENT.md`](./DEVELOPMENT.md) - 開発ガイド
+- [`COMPONENTS.md`](./COMPONENTS.md) - コンポーネント仕様書
+- [`TROUBLESHOOTING.md`](./TROUBLESHOOTING.md) - トラブルシューティング
+- [`CHANGELOG.md`](./CHANGELOG.md) - 変更履歴
+
+## 🔧 開発方針
+
+### 基本原則
+1. **表示担保最優先**: コンポーネントの可視性を最重要視
+2. **段階的実装**: 複雑な機能は小さなステップに分割
+3. **継続的検証**: 各変更後の動作確認を徹底
+4. **文書化**: 全ての判断と変更を記録
+
+### パフォーマンス考慮
+- 重いコンポーネントの動的インポート
+- Three.jsリソースの適切な管理
+- 画像とアニメーションの最適化
+- TypeScriptによる型安全性確保
+
+## 🎯 今後の展望
+
+### 短期目標
+- スナップスクロールアニメーションの安全な実装
+- Projects・Contactセクションの完成
+- パフォーマンス最適化
+
+### 中期目標  
+- アニメーション効果の拡充
+- モバイルUXの改善
+- アクセシビリティ対応
+
+### 長期目標
+- CMS統合の検討
+- 多言語対応
+- PWA化
+
+## 🤝 Claude Code での開発
+
+### 作業開始前に必読
+- **[START_HERE.md](./START_HERE.md)** - 毎回の作業開始時の必須手順
+
+### 必須コマンド（毎回コピペ）
+```
+.claude/instructions.mdと.claude/context.mdを読み込んでから作業を開始してください。表示担保を最優先とし、段階的実装を厳守してください。
+```
+
+### コントリビューション原則
+1. 開発プロセスガイド（CLAUDE.md）を必読
+2. 段階的実装の原則を遵守
+3. 表示担保を最優先
+4. 変更後は必ず動作確認
+
+## 📄 ライセンス
+
+このプロジェクトは個人ポートフォリオサイトです。

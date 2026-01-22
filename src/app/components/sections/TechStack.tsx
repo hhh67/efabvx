@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { ReactNode, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -128,7 +128,7 @@ const IconTooltip: React.FC<{ label: string; children: ReactNode }> = ({
   );
 };
 
-// 画像ベースのブランドアイコン (public/brands/<slug>.png を配置する想定)
+// 軽量化：画像ベースのブランドアイコン
 const BrandImg: React.FC<{ slug: string; name: string }> = ({ slug, name }) => (
   <span className="inline-flex h-14 w-14 items-center justify-center rounded-md">
     <Image
@@ -139,6 +139,9 @@ const BrandImg: React.FC<{ slug: string; name: string }> = ({ slug, name }) => (
       className="h-10 w-10 object-contain select-none pointer-events-none"
       loading="lazy"
       draggable={false}
+      priority={false}
+      placeholder="blur"
+      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyLli5FlVZrWcvN3Km8xkQnV1HFTGEL8vu9RJGm6r/i9uxKqzZXIHQBN2FXR2I5qyq1RQgLIw8/G4wfFJc6dn3lNPT6hJpQv2h0fFlGxrVIhR3RllDLdALG/K0vEovBgidFJGr1fBWJlKmPg="
     />
   </span>
 );
@@ -259,9 +262,36 @@ const stacks: StackGroup[] = [
 ];
 
 export function TechStackSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // セクション全体のスクロール進行度を取得
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  // デバッグログ追加
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on('change', (value) => {
+      console.log('TechStack scroll progress:', value);
+    });
+    return unsubscribe;
+  }, [scrollYProgress]);
+
   return (
-    <section id="tech" className="relative h-screen flex flex-col snap-start">
-      <div className="flex-shrink-0 pt-24 pb-6 px-6 md:px-16">
+    <section
+      ref={sectionRef}
+      id="tech"
+      className="relative snap-start"
+      style={{ height: `${stacks.length * 80 + 120}vh` }} // より長いスクロール距離でゆっくりと
+    >
+      {/* タイトル - 最後のカードと一緒に上に移動 */}
+      <motion.div 
+        className="flex-shrink-0 pt-24 pb-6 px-6 md:px-16 sticky top-0 z-50"
+        style={{
+          y: useTransform(scrollYProgress, [0.9, 1], [0, -200])
+        }}
+      >
         <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -273,49 +303,63 @@ export function TechStackSection() {
             Tech Stack
           </motion.h2>
         </div>
-      </div>
-      <div className="flex-1 overflow-y-auto px-6 md:px-16">
+      </motion.div>
+
+      {/* カードコンテナ - 単一stickyコンテナで統一管理 */}
+      <div className="px-6 md:px-16">
         <div className="max-w-6xl mx-auto">
-          <div className="space-y-4">
-            {stacks.map((s, i) => (
-              <div
-                key={s.group}
-                className="group relative rounded-2xl border-2 border-slate-700/80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 overflow-hidden sticky top-24 min-h-[400px] shadow-2xl shadow-blue-900/20"
-                style={{ zIndex: i + 1 }}
-              >
-                {/* グラデーション装飾 */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 pointer-events-none" />
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 rounded-t-2xl" />
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent" />
-                
-                {/* ホバー時の光る境界線 */}
-                <div className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-br from-blue-400/20 via-cyan-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                
-                <div className="relative h-full flex flex-col">
-                  <h3 className="font-semibold text-xl mb-6 text-blue-300 text-left font-libre">
-                    {s.group}
-                  </h3>
-                  <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                    {s.skills.map((skill) => (
-                      <div
-                        key={skill.name}
-                        className="group/item flex items-center gap-3 p-3 rounded-xl bg-slate-800/80 border border-slate-600/50 hover:bg-slate-700/90 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1"
-                      >
-                        <div className="flex-shrink-0">
-                          <span className="inline-flex items-center justify-center text-blue-300 group-hover/item:text-cyan-300 group-hover/item:scale-110 transition-all duration-300 h-10 w-10 text-2xl">
-                            {skill.icon}
-                          </span>
-                        </div>
-                        <span className="text-slate-100 font-bold text-sm truncate font-dm-serif group-hover/item:text-white transition-colors duration-300">
-                          {skill.name}
+          <motion.div 
+            className="sticky top-40 relative h-[400px]"
+            style={{
+              y: useTransform(scrollYProgress, [0.9, 1], [0, -300])
+            }}
+          >
+            {stacks.map((s, i) => {              
+              return (
+                <motion.div
+                  key={s.group}
+                  className="group absolute inset-0 rounded-2xl border-2 border-slate-700/80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 overflow-hidden shadow-2xl shadow-blue-900/20"
+                  style={{ 
+                    zIndex: i + 1,
+                    opacity: 1,
+                    display: 'block',
+                    visibility: 'visible'
+                  }}
+                >
+              {/* グラデーション装飾 */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 pointer-events-none" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 rounded-t-2xl" />
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent" />
+
+              {/* ホバー時の光る境界線 */}
+              <div className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-br from-blue-400/20 via-cyan-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+              <div className="relative h-full flex flex-col">
+                <h3 className="font-semibold text-xl mb-6 text-blue-300 text-left font-libre">
+                  {s.group}
+                </h3>
+                <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {s.skills.map((skill) => (
+                    <div
+                      key={skill.name}
+                      className="group/item flex items-center gap-3 p-3 rounded-xl bg-slate-800/80 border border-slate-600/50 hover:bg-slate-700/90 hover:border-blue-400/50 transition-colors duration-200"
+                    >
+                      <div className="flex-shrink-0">
+                        <span className="inline-flex items-center justify-center text-blue-300 group-hover/item:text-cyan-300 transition-colors duration-200 h-10 w-10 text-2xl">
+                          {skill.icon}
                         </span>
                       </div>
-                    ))}
-                  </div>
+                      <span className="text-slate-100 font-bold text-sm truncate font-dm-serif group-hover/item:text-white transition-colors duration-300">
+                        {skill.name}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
       </div>
     </section>
