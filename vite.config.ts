@@ -23,6 +23,10 @@ export default defineConfig(({ mode }) => ({
     outDir: 'docs',
     sourcemap: 'hidden',
     rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        '404': path.resolve(__dirname, '404.html'),
+      },
       output: {
         manualChunks: {
           vendor: ['react', 'react-router-dom', 'react-dom'],
